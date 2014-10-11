@@ -4,13 +4,13 @@ from __future__ import unicode_literals
 
 AUTHOR = u'Weverton do Couto Timoteo'
 SITENAME = u'wevtimoteo'
-SITEURL = ''
+SITEURL = 'http://wevtimoteo.github.io'
 
 PATH = 'content'
 
 TIMEZONE = 'Brazil/West'
 
-DEFAULT_LANG = u'en'
+DEFAULT_LANG = u'pt-BR'
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -18,14 +18,12 @@ CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 
 # Blogroll
-LINKS = (('Pelican', 'http://getpelican.com/'),
-         ('Python.org', 'http://python.org/'),
-         ('Jinja2', 'http://jinja.pocoo.org/'),
-         ('You can modify those links in your config file', '#'),)
+LINKS = (('Mangá no Mori', 'http://www.manganomori.com.br/'),
+         ('Abstraindo.com', 'http://www.abstraindo.com'),)
 
 # Social widget
-SOCIAL = (('You can add links in your config file', '#'),
-          ('Another social link', '#'),)
+SOCIAL = (('Twitter', 'http://www.twitter.com/wevtimoteo'),
+          ('Github', 'http://www.github.com/wevtimoteo'),)
 
 DEFAULT_PAGINATION = 10
 
