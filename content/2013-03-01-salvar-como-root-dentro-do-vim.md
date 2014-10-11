@@ -1,4 +1,4 @@
-Title Salvando um arquivo como root sem fechar e abrir o Vim
+Title: Salvando um arquivo como root sem fechar e abrir o Vim
 Date: 2013-03-01 11:29
 Category: vim
 

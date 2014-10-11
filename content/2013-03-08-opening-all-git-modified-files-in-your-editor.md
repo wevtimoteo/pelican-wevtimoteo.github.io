@@ -1,4 +1,4 @@
-Title Abrindo arquivos alterados no Git com seu $EDITOR
+Title: Abrindo arquivos alterados no Git com seu $EDITOR
 Date: 2013-03-08 15:13
 Category: vim
 Tags: vim macos bash
