@@ -1,10 +1,7 @@
----
-layout: post
-title: "Redirecionando de volta no Rails"
-date: 2013-05-15 13:47
-comments: true
-categories: ruby rails
----
+Title: Redirecionando de volta no Rails
+Date: 2013-05-15 13:47
+Category: Ruby
+Tags: ruby rails
 
 Queria só fazer um post rápido de um truque que eu não conhecia =P
 

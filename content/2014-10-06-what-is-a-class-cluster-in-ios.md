@@ -1,10 +1,7 @@
----
-layout: post
-title: "O que significa 'Class Cluster' no iOS"
-date: 2014-10-06 23:10
-comments: true
-categories: ios, foundation, objective-c, class cluster, design pattern
----
+Title: O que significa 'Class Cluster' no iOS
+Date: 2014-10-06 23:10
+Category: Objective-c
+Tags: ios, foundation, objective-c, class cluster, design pattern
 
 `Class Cluster` é um design pattern usado no framework Foundation.
 

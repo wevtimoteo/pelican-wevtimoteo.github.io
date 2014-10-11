@@ -1,10 +1,7 @@
----
-layout: post
-title: "Vá direto pro código antes de pesquisar"
-date: 2013-03-12 14:13
-comments: true
-categories: development debugging
----
+Title: Vá direto pro código antes de pesquisar
+Date: 2013-03-12 14:13
+Category: Development
+Tags: development debugging
 
 No começo desse mês recebi uma newsletter do [Jesse Storimer](http://jstorimer.com) que achei muito interessante e resolvi fazer uma réplica.
 

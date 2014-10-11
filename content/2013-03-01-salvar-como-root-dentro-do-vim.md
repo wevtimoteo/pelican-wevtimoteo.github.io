@@ -1,10 +1,6 @@
----
-layout: post
-title: "Salvando um arquivo como root sem fechar e abrir o Vim"
-date: 2013-03-01 11:29
-comments: true
-categories: vim
----
+Title Salvando um arquivo como root sem fechar e abrir o Vim
+Date: 2013-03-01 11:29
+Category: vim
 
 Seguindo a dica do [Lucas Catón](http://blog.lucascaton.com.br/): algumas vezes abrimos um arquivo que não temos permissão de escrita.
 

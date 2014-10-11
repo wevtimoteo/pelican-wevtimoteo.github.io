@@ -1,12 +1,9 @@
----
-layout: post
-title: "Abrindo arquivos alterados no Git com seu $EDITOR"
-date: 2013-03-08 15:13
-comments: true
-categories: vim macos bash
----
+Title Abrindo arquivos alterados no Git com seu $EDITOR
+Date: 2013-03-08 15:13
+Category: vim
+Tags: vim macos bash
 
-Hoje cheguei no projeto que estou trabalhando na [Baby](http://www.baby.com.br) e um simples:
+Recomeçando o trabalho no início do dia:
 
 ``git st`` (git status)
 

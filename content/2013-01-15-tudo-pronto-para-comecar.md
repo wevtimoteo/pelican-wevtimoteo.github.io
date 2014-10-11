@@ -1,10 +1,6 @@
----
-layout: post
-title: "Tudo pronto para começar"
-date: 2013-01-15 10:55
-comments: true
-categories: Offtopic
----
+Title: Tudo pronto para começar
+Date: 2013-01-15 10:55
+Category: Offtopic
 
 Olá! Finalmente coloquei uma utilidade nesse domínio, apesar que desde o início o objetivo já era colocar um blog aqui.
 

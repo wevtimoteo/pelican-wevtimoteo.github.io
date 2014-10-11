@@ -1,10 +1,7 @@
----
-layout: post
-title: "Instalando uma versão específica de uma fórmula no Homebrew"
-date: 2013-03-18 17:51
-comments: true
-categories: brew macosx
----
+Title: Instalando uma versão específica de uma fórmula no Homebrew
+Date: 2013-03-18 17:51
+Category: MacOS
+Tags: brew macosx
 
 Fiquei brincando um pouco com os comandos do `brew` e surgiu uma dúvida: como instalar versões específicas no [Homebrew](http://mxcl.github.com/homebrew/)?
 
