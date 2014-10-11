@@ -21,4 +21,4 @@ DELETE_OUTPUT_DIRECTORY = True
 # Following items are often useful when publishing
 
 DISQUS_SITENAME = "wevtimoteo"
-#GOOGLE_ANALYTICS = ""
+GOOGLE_ANALYTICS = "UA-37654492-1"
