@@ -1,48 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta charset="utf-8" />
-        <title>Abrindo arquivos alterados no Git com seu $EDITOR</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
-
-        <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+	<meta charset="utf-8">
+	<title>Abrindo arquivos alterados no Git com seu $EDITOR — wevtimoteo</title>
+	<meta name="description" content="Title: Abrindo arquivos alterados no Git com seu $EDITOR; Date: 2013-03-08; Author: Weverton do Couto Timoteo">
+	<meta name="author" content="Weverton do Couto Timoteo">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+		<![endif]-->
+	<link href="/theme/css/ipython.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/simplex/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/css/local.css" rel="stylesheet">
+	<link href="/theme/css/pygments.css" rel="stylesheet">
 </head>
-
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">wevtimoteo </a></h1>
-                <nav><ul>
-                    <li><a href="/category/development.html">Development</a></li>
-                    <li><a href="/category/macos.html">MacOS</a></li>
-                    <li><a href="/category/objective-c.html">Objective-c</a></li>
-                    <li><a href="/category/offtopic.html">Offtopic</a></li>
-                    <li><a href="/category/ruby.html">Ruby</a></li>
-                    <li><a href="/category/testing.html">Testing</a></li>
-                    <li class="active"><a href="/category/vim.html">vim</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-<section id="content" class="body">
-  <article>
-    <header>
-      <h1 class="entry-title">
-        <a href="/abrindo-arquivos-alterados-no-git-com-seu-editor.html" rel="bookmark"
-           title="Permalink to Abrindo arquivos alterados no Git com seu $EDITOR">Abrindo arquivos alterados no Git com seu $EDITOR</a></h1>
-    </header>
-
-    <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-03-08T15:13:00">
-                Published: Fri 08 March 2013
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/weverton-do-couto-timoteo.html">Weverton do Couto Timoteo</a>
-        </address>
-<p>In <a href="/category/vim.html">vim</a>. </p>
-<p>tags: <a href="/tag/vim-macos-bash.html">vim macos bash</a> </p>
-</footer><!-- /.post-info -->      <p>Recomeçando o trabalho no início do dia:</p>
+<body>
+<div class="container">
+	<div class="page-header">
+		<h1><a href="">wevtimoteo</a>
+			<br><small>what we observe is not the nature itself but the nature exposed to our method of questioning</small></h1>
+	</div>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+<div class="article" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="text-center article-header">
+		<h1 itemprop="name headline" class="article-title">Abrindo arquivos alterados no Git com seu $EDITOR</h1>
+		<span itemprop="author" itemscope itemtype="http://schema.org/Person">
+			<h4 itemprop="name">Weverton do Couto Timoteo</h4>
+		</span>
+		<time datetime="2013-03-08T15:13:00" itemprop="datePublished">Fri 08 March 2013</time>
+	</div>
+	<div>
+		Category:
+		<span itemprop="articleSection">
+			<a href="/category/vim.html" rel="category">vim</a>
+		</span>
+	</div>
+ 
+	<div>
+		Tags:
+		<span itemprop="keywords">
+			<a href="/tag/vim-macos-bash.html" rel="tag">vim macos bash</a>
+		</span>
+	</div>
+	<div itemprop="articleBody" class="article-body"><p>Recomeçando o trabalho no início do dia:</p>
 <p><code>git st</code> (git status)</p>
 <p>E obtenho:</p>
 <div class="highlight"><pre><span class="c"># On branch master</span>
@@ -65,38 +69,83 @@
 <p>Isso fará com que todos os arquivos modificados sejam abertos no seu $EDITOR favorito. Se for <code>vim</code>, todos os arquivos serão abertos em buffers. Para abrir em uma abas:</p>
 <p><code>$EDITOR -p $(git status --short | awk '$1 ~ /^M$/ {print $2}')</code></p>
 <p>Depois disso pensei em usar em alias. Mas usar <code>gitedit</code> seria muito chato, então fiz essa modificação no meu <a href="https://github.com/wolcanus/dotfiles/commit/4321444655acae64b05ee02faad7f463df19aade">dotfiles</a> para poder utilizar um simples:</p>
-<p><code>git edit</code></p>
-    </div><!-- /.entry-content -->
-
-  </article>
-</section>
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>blogroll</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                            <li><a href="http://python.org/">Python.org</a></li>
-                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-                            <li><a href="#">You can modify those links in your config file</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-
-                            <li><a href="#">You can add links in your config file</a></li>
-                            <li><a href="#">Another social link</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
-
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
-
+<p><code>git edit</code></p></div>
+	<hr>
+	<h2>Comments</h2>
+</div>
+		</div>
+	</div> 	<!-- <hr> -->
+</div> <!-- /container -->
+<footer class="aw-footer bg-danger">
+	<div class="container"> <!-- footer -->
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>Navigation</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="">wevtimoteo</a></li>
+							<li><a href="/feeds/rss.xml"><i class="fa fa-rss "></i> rss</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Author</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://aboutwilson.net">Homepage</a></li>
+							<li><a href="http://github.com/wilsonfreitas">Github</a></li>
+							<li><a href="https://twitter.com/aboutwilson">Twitter</a></li>
+							<li><a href="https://plus.google.com/114469936125336696794?rel=author">Google+</a></li>
+							<li><a href="https://www.facebook.com/wnfreitas">Facebook</a></li>
+							<li><a href="http://www.linkedin.com/pub/wilson-freitas/a/572/609">Linked-in</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Categories</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="/category/Development.html">Development (1)</a></li>
+							<li><a href="/category/MacOS.html">MacOS (1)</a></li>
+							<li><a href="/category/Objective-c.html">Objective-c (1)</a></li>
+							<li><a href="/category/Offtopic.html">Offtopic (2)</a></li>
+							<li><a href="/category/Ruby.html">Ruby (1)</a></li>
+							<li><a href="/category/Testing.html">Testing (1)</a></li>
+							<li><a href="/category/vim.html">vim (2)</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<h4>Links</h4>
+						<ul class="list-unstyled my-list-style">
+							<li><a href="http://www.r-bloggers.com/">R-bloggers</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12 text-center center-block aw-bottom">
+			<p>&copy; Weverton do Couto Timoteo 2014</p>
+			<p>Powered by Pelican</p>
+		</div>
+	</div>
+</div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$("div.collapseheader").click(function () {
+		$header = $(this).children("span").first();
+		$codearea = $(this).children(".input_area");
+		$codearea.slideToggle(500, function () {
+			$header.text(function () {
+				return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+			});
+		});
+	});
+});
+</script>
+ 
 </body>
 </html>
