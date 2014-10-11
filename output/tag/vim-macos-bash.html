@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>wevtimoteo - vim macos bash</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">wevtimoteo </a></h1>
+                <nav><ul>
+                    <li><a href="/category/development.html">Development</a></li>
+                    <li><a href="/category/macos.html">MacOS</a></li>
+                    <li><a href="/category/objective-c.html">Objective-c</a></li>
+                    <li><a href="/category/offtopic.html">Offtopic</a></li>
+                    <li><a href="/category/ruby.html">Ruby</a></li>
+                    <li><a href="/category/testing.html">Testing</a></li>
+                    <li><a href="/category/vim.html">vim</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/abrindo-arquivos-alterados-no-git-com-seu-editor.html">Abrindo arquivos alterados no Git com seu $EDITOR</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2013-03-08T15:13:00">
+                Published: Fri 08 March 2013
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/weverton-do-couto-timoteo.html">Weverton do Couto Timoteo</a>
+        </address>
+<p>In <a href="/category/vim.html">vim</a>. </p>
+<p>tags: <a href="/tag/vim-macos-bash.html">vim macos bash</a> </p>
+</footer><!-- /.post-info --><p>Recomeçando o trabalho no início do dia:</p>
+<p><code>git st</code> (git status)</p>
+<p>E obtenho:</p>
+<div class="highlight"><pre><span class="c"># On branch master</span>
+<span class="c"># Changes not staged for commit:</span>
+<span class="c">#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span>
+<span class="c">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span>
+<span class="c">#</span>
+<span class="c"># modified:   Gemfile</span>
+<span class="c"># modified:   Gemfile.lock</span>
+<span class="c"># modified:   app/api/company.rb</span>
+<span class="c"># modified:   app/helpers/authentication_helper.rb</span>
+<span class="c"># modified:   config/boot.rb</span>
+<span class="c"># modified:   config/initializers/app_config.rb</span>
+</pre></div>
+
+
+<p>Pensei: seria legal, automaticamente abrir esses arquivos no meu $EDITOR.</p>
+<p>Um simples <code>git status --short</code> resolveria isso, adicionado ao awk e o próprio $EDITOR:</p>
+<p><code>$EDITOR $(git status --short | awk '$1 ~ /^M$/ {print $2}')</code></p>
+<p>Isso fará com que todos os arquivos modificados sejam abertos no seu $EDITOR favorito. Se for <code>vim</code>, todos os arquivos serão abertos em buffers. Para abrir em uma abas:</p>
+<p><code>$EDITOR -p $(git status --short | awk '$1 ~ /^M$/ {print $2}')</code></p>
+<p>Depois disso pensei em usar em alias. Mas usar <code>gitedit</code> seria muito chato, então fiz essa modificação no meu <a href="https://github.com/wolcanus/dotfiles/commit/4321444655acae64b05ee02faad7f463df19aade">dotfiles</a> para poder utilizar um simples:</p>
+<p><code>git edit</code></p>                </article>
+<p class="paginator">
+    Page 1 / 1
+</p>
+            </aside><!-- /#featured -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
