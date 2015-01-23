@@ -9,7 +9,9 @@ Já tinha lido muitos artigos a respeito de [Cyclomatic Complexity](http://en.wi
 
 Antes tarde que nunca, encontrei o plugin [vim-flog](https://github.com/fousa/vim-flog) que é um fork do [vim-ruby-complexity](https://github.com/skammer/vim-ruby-complexity); que como o nome já diz, serve para avaliar a Complexidade Ciclomática dentro de scripts .rb.
 
-Acontece que esse plugin executa código ruby dentro do arquivo `.vim`. Até então, isso não deveria ser um problema. Acontece que quando o script rodava:
+Acontece que esse plugin executa código ruby dentro do arquivo `.vim` (caso queira saber mais: [Scripting Vim with Ruby](http://mattmargolis.net/scripting_vim_with_ruby.pdf).
+
+Até então, isso não deveria ser um problema. Acontece que quando o script rodava:
 
 ```
 ruby << EOF

@@ -40,7 +40,8 @@
 </footer><!-- /.post-info --><p>Primeiro post de 2015 e primeiro post na plataforma Pelican depois da migração do <a href="http://octopress.org/">Octopress</a> para o <a href="http://blog.getpelican.com/">Pelican</a>. Depois escrevo sobre como foi essa migração.</p>
 <p>Já tinha lido muitos artigos a respeito de <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity">Cyclomatic Complexity</a>, mas nunca tentei colocar algum script para avaliar meu código.</p>
 <p>Antes tarde que nunca, encontrei o plugin <a href="https://github.com/fousa/vim-flog">vim-flog</a> que é um fork do <a href="https://github.com/skammer/vim-ruby-complexity">vim-ruby-complexity</a>; que como o nome já diz, serve para avaliar a Complexidade Ciclomática dentro de scripts .rb.</p>
-<p>Acontece que esse plugin executa código ruby dentro do arquivo <code>.vim</code>. Até então, isso não deveria ser um problema. Acontece que quando o script rodava:</p>
+<p>Acontece que esse plugin executa código ruby dentro do arquivo <code>.vim</code> (caso queira saber mais: <a href="http://mattmargolis.net/scripting_vim_with_ruby.pdf">Scripting Vim with Ruby</a>.</p>
+<p>Até então, isso não deveria ser um problema. Acontece que quando o script rodava:</p>
 <div class="highlight"><pre><span class="n">ruby</span> <span class="o">&lt;&lt;</span> <span class="n">EOF</span>
 
 <span class="n">require</span> <span class="err">&#39;</span><span class="n">rubygems</span><span class="err">&#39;</span>
