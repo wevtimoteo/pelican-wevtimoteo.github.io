@@ -28,7 +28,7 @@ Tentei entender o problema olhando o `$GEM_PATH`, `$GEM_ROOT` e `$GEM_HOME` dent
 
 Parti para outro caminho e olhei o path do ruby executado adicionando:
 
-```
+```ruby
 puts $:
 
 require 'rubygems'
@@ -39,7 +39,7 @@ O `$:` serve para imprimir o path de onde o `ruby` é procurado (tente rodar iss
 
 Nesse comando, percebi que o `ruby` que estava sendo executado era o que vem juntamente do OS X Yosemite (2.x) e não o meu `ruby` do `rbenv` (alternativa ao `rvm`).
 
-Como eu sempre fiz upgrade nos releases do OS X e nunca um clean install.
+Como eu sempre fiz upgrade nos releases do `OS X` e nunca um clean install.
 Achei um report do bug no [path_helper](https://github.com/dotphiles/dotzsh#mac-os-x), para resolver isso, basta:
 
 ```

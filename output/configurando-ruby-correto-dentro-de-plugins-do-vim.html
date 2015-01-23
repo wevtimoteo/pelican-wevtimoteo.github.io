@@ -45,30 +45,30 @@
 </footer><!-- /.post-info -->      <p>Primeiro post de 2015 e primeiro post na plataforma Pelican depois da migração do <a href="http://octopress.org/">Octopress</a> para o <a href="http://blog.getpelican.com/">Pelican</a>. Depois escrevo sobre como foi essa migração.</p>
 <p>Já tinha lido muitos artigos a respeito de <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity">Cyclomatic Complexity</a>, mas nunca tentei colocar algum script para avaliar meu código.</p>
 <p>Antes tarde que nunca, encontrei o plugin <a href="https://github.com/fousa/vim-flog">vim-flog</a> que é um fork do <a href="https://github.com/skammer/vim-ruby-complexity">vim-ruby-complexity</a>; que como o nome já diz, serve para avaliar a Complexidade Ciclomática dentro de scripts .rb.</p>
-<p>Acontece que esse plugin executa código ruby dentro do arquivo <code>.vim</code> (caso queira saber mais: <a href="http://mattmargolis.net/scripting_vim_with_ruby.pdf">Scripting Vim with Ruby</a>.</p>
+<p>Acontece que esse plugin executa código ruby dentro do arquivo <code>.vim</code> (caso queira saber mais: <a href="http://mattmargolis.net/scripting_vim_with_ruby.pdf">Scripting Vim with Ruby</a>).</p>
 <p>Até então, isso não deveria ser um problema. Acontece que quando o script rodava:</p>
-<div class="highlight"><pre><span class="n">ruby</span> <span class="o">&lt;&lt;</span> <span class="n">EOF</span>
+<div class="highlight"><pre><span class="n">ruby</span> <span class="o">&lt;&lt;</span> <span class="no">EOF</span>
 
-<span class="n">require</span> <span class="err">&#39;</span><span class="n">rubygems</span><span class="err">&#39;</span>
-<span class="n">require</span> <span class="err">&#39;</span><span class="n">flog</span><span class="err">&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;flog&#39;</span>
 
-<span class="n">class</span> <span class="n">Flog</span>
+<span class="k">class</span> <span class="nc">Flog</span>
 </pre></div>
 
 
-<p>Ocorria um erro na linha <code>require 'flog'</code>, apesar de eu já ter instalado a gem no meu ruby local usando <code>gem install flog</code>.</p>
-<p>Tentei entender o problema olhando o $GEM_PATH, $GEM_ROOT e $GEM_HOME dentro do código do plugin, no entanto, ambos estavam vazios.</p>
+<p>Ocorria um erro na linha <code>require 'flog'</code> que não encontrava a <code>gem</code>, apesar de eu já ter instalado no meu <code>ruby</code> local usando <code>gem install flog</code>.</p>
+<p>Tentei entender o problema olhando o <code>$GEM_PATH</code>, <code>$GEM_ROOT</code> e <code>$GEM_HOME</code> dentro do código do plugin, no entanto, ambos estavam vazios.</p>
 <p>Parti para outro caminho e olhei o path do ruby executado adicionando:</p>
-<div class="highlight"><pre><span class="n">puts</span> <span class="err">$</span><span class="o">:</span>
+<div class="highlight"><pre><span class="nb">puts</span> <span class="vg">$:</span>
 
-<span class="n">require</span> <span class="err">&#39;</span><span class="n">rubygems</span><span class="err">&#39;</span>
-<span class="n">require</span> <span class="err">&#39;</span><span class="n">flog</span><span class="err">&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;rubygems&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;flog&#39;</span>
 </pre></div>
 
 
-<p>O <code>$:</code> serve para imprimir o path de onde o ruby é procurado (tente rodar isso dentro do irb).</p>
+<p>O <code>$:</code> serve para imprimir o path de onde o <code>ruby</code> é procurado (tente rodar isso dentro do <code>irb</code>).</p>
 <p>Nesse comando, percebi que o <code>ruby</code> que estava sendo executado era o que vem juntamente do OS X Yosemite (2.x) e não o meu <code>ruby</code> do <code>rbenv</code> (alternativa ao <code>rvm</code>).</p>
-<p>Como eu sempre fiz upgrade nos releases do OS X e nunca um clean install.
+<p>Como eu sempre fiz upgrade nos releases do <code>OS X</code> e nunca um clean install.
 Achei um report do bug no <a href="https://github.com/dotphiles/dotzsh#mac-os-x">path_helper</a>, para resolver isso, basta:</p>
 <div class="highlight"><pre><span class="n">sudo</span> <span class="n">chmod</span> <span class="n">ugo</span><span class="o">-</span><span class="n">x</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">libexec</span><span class="o">/</span><span class="n">path_helper</span>
 </pre></div>
