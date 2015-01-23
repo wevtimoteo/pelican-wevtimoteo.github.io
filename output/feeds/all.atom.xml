@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>wevtimoteo</title><link href="http://wevtimoteo.github.io/" rel="alternate"></link><link href="http://wevtimoteo.github.io/feeds/all.atom.xml" rel="self"></link><id>http://wevtimoteo.github.io/</id><updated>2014-10-06T23:10:00-04:00</updated><entry><title>Configurando ruby correto dentro de plugins do vim</title><link href="http://wevtimoteo.github.io/configurando-ruby-correto-dentro-de-plugins-do-vim.html" rel="alternate"></link><updated>2014-10-06T23:10:00-04:00</updated><author><name>Weverton do Couto Timoteo</name></author><id>tag:wevtimoteo.github.io,2014-10-06:configurando-ruby-correto-dentro-de-plugins-do-vim.html</id><summary type="html">&lt;p&gt;Primeiro post de 2015 e primeiro post na plataforma Pelican depois da migração do &lt;a href="http://octopress.org/"&gt;Octopress&lt;/a&gt; para o &lt;a href="http://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;. Depois escrevo sobre como foi essa migração.&lt;/p&gt;
+&lt;p&gt;Já tinha lido muitos artigos a respeito de &lt;a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"&gt;Cyclomatic Complexity&lt;/a&gt;, mas nunca tentei colocar algum script para avaliar meu código.&lt;/p&gt;
+&lt;p&gt;Antes tarde que nunca, encontrei o plugin &lt;a href="https://github.com/fousa/vim-flog"&gt;vim-flog&lt;/a&gt; que é um fork do &lt;a href="https://github.com/skammer/vim-ruby-complexity"&gt;vim-ruby-complexity&lt;/a&gt;; que como o nome já diz, serve para avaliar a Complexidade Ciclomática dentro de scripts .rb.&lt;/p&gt;
+&lt;p&gt;Acontece que esse plugin executa código ruby dentro do arquivo &lt;code&gt;.vim&lt;/code&gt; (caso queira saber mais: &lt;a href="http://mattmargolis.net/scripting_vim_with_ruby.pdf"&gt;Scripting Vim with Ruby&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Até então, isso não deveria ser um problema. Acontece que quando o script rodava:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ruby&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;EOF&lt;/span&gt;
+
+&lt;span class="n"&gt;require&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;rubygems&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;require&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;flog&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+
+&lt;span class="n"&gt;class&lt;/span&gt; &lt;span class="n"&gt;Flog&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Ocorria um erro na linha &lt;code&gt;require 'flog'&lt;/code&gt;, apesar de eu já ter instalado a gem no meu ruby local usando &lt;code&gt;gem install flog&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Tentei entender o problema olhando o $GEM_PATH, $GEM_ROOT e $GEM_HOME dentro do código do plugin, no entanto, ambos estavam vazios.&lt;/p&gt;
+&lt;p&gt;Parti para outro caminho e olhei o path do ruby executado adicionando:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;puts&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+
+&lt;span class="n"&gt;require&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;rubygems&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;require&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;flog&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;O &lt;code&gt;$:&lt;/code&gt; serve para imprimir o path de onde o ruby é procurado (tente rodar isso dentro do irb).&lt;/p&gt;
+&lt;p&gt;Nesse comando, percebi que o &lt;code&gt;ruby&lt;/code&gt; que estava sendo executado era o que vem juntamente do OS X Yosemite (2.x) e não o meu &lt;code&gt;ruby&lt;/code&gt; do &lt;code&gt;rbenv&lt;/code&gt; (alternativa ao &lt;code&gt;rvm&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;Como eu sempre fiz upgrade nos releases do OS X e nunca um clean install.
+Achei um report do bug no &lt;a href="https://github.com/dotphiles/dotzsh#mac-os-x"&gt;path_helper&lt;/a&gt;, para resolver isso, basta:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;chmod&lt;/span&gt; &lt;span class="n"&gt;ugo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libexec&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path_helper&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Segue trecho do link acima caso o link se torne obsoleto:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;path_helper&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;intended&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;make&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="n"&gt;easier&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;installers&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;add&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;paths&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;environment&lt;/span&gt; &lt;span class="n"&gt;without&lt;/span&gt; &lt;span class="n"&gt;having&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;edit&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt; &lt;span class="n"&gt;configuration&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="n"&gt;adding&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;paths&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;directory&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+
+&lt;span class="n"&gt;Unfortunately&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;path_helper&lt;/span&gt; &lt;span class="n"&gt;always&lt;/span&gt; &lt;span class="n"&gt;reads&lt;/span&gt; &lt;span class="n"&gt;paths&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;paths&lt;/span&gt; &lt;span class="n"&gt;set&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="n"&gt;Apple&lt;/span&gt; &lt;span class="n"&gt;then&lt;/span&gt; &lt;span class="n"&gt;paths&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;paths&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;set&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="n"&gt;third&lt;/span&gt; &lt;span class="n"&gt;party&lt;/span&gt; &lt;span class="n"&gt;installers&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;lastly&lt;/span&gt; &lt;span class="n"&gt;paths&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;PATH&lt;/span&gt; &lt;span class="n"&gt;environment&lt;/span&gt; &lt;span class="n"&gt;variable&lt;/span&gt; &lt;span class="n"&gt;set&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;parent&lt;/span&gt; &lt;span class="n"&gt;process&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;which&lt;/span&gt; &lt;span class="n"&gt;ultimately&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;set&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;export&lt;/span&gt; &lt;span class="n"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt; &lt;span class="n"&gt;Thus&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="n"&gt;reorders&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="n"&gt;priorities&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt; &lt;span class="n"&gt;directories&lt;/span&gt; &lt;span class="n"&gt;meant&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;override&lt;/span&gt; &lt;span class="n"&gt;system&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt; &lt;span class="n"&gt;directories&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt; &lt;span class="n"&gt;up&lt;/span&gt; &lt;span class="n"&gt;at&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;tail&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="vim"></category><category term="ruby"></category><category term="vim plugins"></category></entry><entry><title>O que significa 'Class Cluster' no iOS</title><link href="http://wevtimoteo.github.io/o-que-significa-class-cluster-no-ios.html" rel="alternate"></link><updated>2014-10-06T23:10:00-04:00</updated><author><name>Weverton do Couto Timoteo</name></author><id>tag:wevtimoteo.github.io,2014-10-06:o-que-significa-class-cluster-no-ios.html</id><summary type="html">&lt;p&gt;&lt;code&gt;Class Cluster&lt;/code&gt; é um design pattern usado no framework Foundation.&lt;/p&gt;
+&lt;p&gt;O objetivo desse pattern é agrupar subclasses privadas a partir de uma superclasse pública abstrata.&lt;/p&gt;
+&lt;h2&gt;Sem Class Cluster&lt;/h2&gt;
+&lt;p&gt;Imagine o seguinte cenário: você precisa armazenar diversas medidas, milímetros, centímetros, metros, quilômetros.&lt;/p&gt;
+&lt;p&gt;O que todas essas medidas possuem em comum? Elas podem ser convertidas (ex.: metros =&amp;gt; centímetros) e podem ser representadas por uma única classe.
+No entanto, o armazenamento de cada uma delas pode ser diferente.&lt;/p&gt;
+&lt;p&gt;Para lidar com este cenário poderíamos implementar da seguinte maneira:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Comprimento (superclasse)&lt;/li&gt;
+&lt;li&gt;Milímetro&lt;/li&gt;
+&lt;li&gt;Centímetro&lt;/li&gt;
+&lt;li&gt;Metro&lt;/li&gt;
+&lt;li&gt;Quilômetro&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;Comprimento&lt;/code&gt; é nossa superclasse que declara os métodos principais de operações que todas as outras subclasses terão em comum.&lt;/p&gt;
+&lt;p&gt;Neste exemplo as subclasses são públicas, ou seja, você pode instanciá-las diretamente.&lt;/p&gt;
+&lt;p&gt;O conceito é simples mas a interface começa a ficar complexa de acordo com a quantidade de subclasses.&lt;/p&gt;
+&lt;h2&gt;Com Class Cluster&lt;/h2&gt;
+&lt;p&gt;Com o mesmo cenário, vamos imaginar uma solução diferente: ao invés das subclasses públicas teremos apenas nossa superclasse pública. E como iremos instanciar uma subclasse irá depender do que nossa superclasse &lt;code&gt;Comprimento&lt;/code&gt; suporta.&lt;/p&gt;
+&lt;p&gt;Agora é responsabilidade da superclasse dizer qual objeto deve ser criado a partir do método de classe que for chamado.&lt;/p&gt;
+&lt;p&gt;Exemplo:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;WWLength *aMeter = [WWLength lengthWithMeter:1];&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Cada objeto retornado pelo seu método de factory pode pertencer a um tipo de instância da subclasse. Mas não se esqueça, neste caso a subclasse está oculta, você não a conhece, então nossa instância &lt;code&gt;aMeter&lt;/code&gt; é do tipo &lt;code&gt;WWLength&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Esse é o conceito do Class Cluster, que é utilizado intensamente no framework Foundation.&lt;/p&gt;
+&lt;p&gt;Dê uma olhada na documentação para obter mais informações de classes do Foundation que seguem esta abordagem: &lt;a href="https://developer.apple.com/library/ios/documentation/general/conceptual/DevPedia-CocoaCore/ClassCluster.html"&gt;Cocoa Core Class Cluters&lt;/a&gt;&lt;/p&gt;</summary><category term="ios"></category><category term="foundation"></category><category term="objective-c"></category><category term="class cluster"></category><category term="design pattern"></category></entry><entry><title>Redirecionando de volta no Rails</title><link href="http://wevtimoteo.github.io/redirecionando-de-volta-no-rails.html" rel="alternate"></link><updated>2013-05-15T13:47:00-04:00</updated><author><name>Weverton do Couto Timoteo</name></author><id>tag:wevtimoteo.github.io,2013-05-15:redirecionando-de-volta-no-rails.html</id><summary type="html">&lt;p&gt;Queria só fazer um post rápido de um truque que eu não conhecia =P&lt;/p&gt;
+&lt;p&gt;O comando &lt;code&gt;redirect_to :back&lt;/code&gt; faz exatamente o ele diz (óbvio): redireciona o usuário de volta para página que o mesmo estava.&lt;/p&gt;
+&lt;p&gt;Esse comando é similar ao &lt;code&gt;redirect_to request.env["HTTP_REFERER"]&lt;/code&gt;, por isso não se esqueça de setar o HTTP_REFERER no seu teste de controller.&lt;/p&gt;
+&lt;p&gt;Algo bacana desse redirect é que ele leva os &lt;code&gt;params&lt;/code&gt; também, então se o usuário estava em página de busca cheia de filtros, nada será perdido.&lt;/p&gt;</summary><category term="ruby rails"></category></entry><entry><title>Instalando uma versão específica de uma fórmula no Homebrew</title><link href="http://wevtimoteo.github.io/instalando-uma-versao-especifica-de-uma-formula-no-homebrew.html" rel="alternate"></link><updated>2013-03-18T17:51:00-04:00</updated><author><name>Weverton do Couto Timoteo</name></author><id>tag:wevtimoteo.github.io,2013-03-18:instalando-uma-versao-especifica-de-uma-formula-no-homebrew.html</id><summary type="html">&lt;p&gt;Fiquei brincando um pouco com os comandos do &lt;code&gt;brew&lt;/code&gt; e surgiu uma dúvida: como instalar versões específicas no &lt;a href="http://mxcl.github.com/homebrew/"&gt;Homebrew&lt;/a&gt;?&lt;/p&gt;
+&lt;h3&gt;Atualize&lt;/h3&gt;
+&lt;p&gt;Antes de mais nada, atualize suas fórmulas com o seguinte comando:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;brew update&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;Instalando uma versão específica&lt;/h3&gt;
+&lt;p&gt;Para listar as versões disponíveis para uma fórmula, utilize:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;brew versions phantomjs&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Você terá uma lista parecida com essa:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;1.8.1    git checkout 1a69283 /usr/local/Library/Formula/phantomjs.rb
+1.8.0    git checkout 7b4df06 /usr/local/Library/Formula/phantomjs.rb
+1.7.0    git checkout d37d922 /usr/local/Library/Formula/phantomjs.rb
+1.6.1    git checkout 6b8d25f /usr/local/Library/Formula/phantomjs.rb
+1.6.0    git checkout 9c7885b /usr/local/Library/Formula/phantomjs.rb
+1.5.0    git checkout dbcbe16 /usr/local/Library/Formula/phantomjs.rb
+1.4.1    git checkout cfbdf22 /usr/local/Library/Formula/phantomjs.rb
+1.3.0    git checkout 5848860 /usr/local/Library/Formula/phantomjs.rb
+1.2.0    git checkout c50bbb8 /usr/local/Library/Formula/phantomjs.rb
+1.1.0    git checkout 4e7c332 /usr/local/Library/Formula/phantomjs.rb
+1.0.0    git checkout 0476235 /usr/local/Library/Formula/phantomjs.rb
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;!-- more --&gt;
+
+&lt;p&gt;Agora, vamos instalar a versão 1.7.0. Para isso, acesse o diretório das fórmulas:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;cd /usr/local/Library/Formula/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;E use o próprio comando do output do &lt;code&gt;brew versions phantomjs&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git checkout d37d922 /usr/local/Library/Formula/phantomjs.rb&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Isso fará com que a fórmula do &lt;a href="http://phantomjs.org/"&gt;PhantomJS&lt;/a&gt; volte para versão do SHA utilizado.&lt;/p&gt;
+&lt;p&gt;Agora use:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;brew install phantomjs&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Se tudo ocorreu bem, você deve obter um resultado parecido com este:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;/usr/local/Cellar/phantomjs/1.7.0: 4 files, 10M, built in 2 seconds&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;Instalando outras versões&lt;/h2&gt;
+&lt;p&gt;Agora que você já sabe como instalar uma versão, vamos instalar a mais recente, no meu caso é &lt;code&gt;1.8.1&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git checkout 1a69283 /usr/local/Library/Formula/phantomjs.rb&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Como você já possui a fórmula do PhantomJS 1.7.0 instalada, você vai precisar "desativá-la" primeiro:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;brew unlink phantomjs&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Agora é só instalar:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;brew install phantomjs&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;O resultado será como este:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;/usr/local/Cellar/phantomjs/1.8.1: 96 files, 9.2M, built in 2 seconds&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;Trocando entre versões&lt;/h2&gt;
+&lt;p&gt;Agora que você está trabalhando com várias versões instaladas, nada mais justo você poder alternar entre elas.&lt;/p&gt;
+&lt;p&gt;Primeiro vamos listar as versões que você possui na sua máquina:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;brew info phantomjs&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Eu tenho instalado:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;phantomjs&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;stable&lt;/span&gt; &lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;://&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;phantomjs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;span class="sr"&gt;/usr/local/Cellar/phantomjs/&lt;/span&gt;&lt;span class="mf"&gt;1.7&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="sr"&gt;/usr/local/Cellar/phantomjs/&lt;/span&gt;&lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;96&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="sr"&gt;/usr/local/Cellar/phantomjs/&lt;/span&gt;&lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;96&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;9.2&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="o"&gt;://&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;com&lt;/span&gt;&lt;span class="sr"&gt;/mxcl/homebrew/commits/master/Library/Formula/&lt;/span&gt;&lt;span class="n"&gt;phantomjs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;rb&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;A versão que está com &lt;em&gt;*&lt;/em&gt; é a que está ativada.
+Agora vamos ir para 1.7.0:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;brew switch phantomjs 1.7.0&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Dê um &lt;code&gt;brew info phantomjs&lt;/code&gt; para confirmar se deu tudo certo:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;phantomjs&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;stable&lt;/span&gt; &lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;://&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;phantomjs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;span class="sr"&gt;/usr/local/Cellar/phantomjs/&lt;/span&gt;&lt;span class="mf"&gt;1.7&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="sr"&gt;/usr/local/Cellar/phantomjs/&lt;/span&gt;&lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;96&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="sr"&gt;/usr/local/Cellar/phantomjs/&lt;/span&gt;&lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;96&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;9.2&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="o"&gt;://&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;com&lt;/span&gt;&lt;span class="sr"&gt;/mxcl/homebrew/commits/master/Library/Formula/&lt;/span&gt;&lt;span class="n"&gt;phantomjs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;rb&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Pronto! Se quiser desinstalar é só ir utilizando &lt;code&gt;brew uninstall phantomjs&lt;/code&gt; entre as versões.
+Ou se preferir, você pode remover tudo de uma vez:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;brew uninstall -f phantomjs&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Se der &lt;code&gt;brew info phantomjs&lt;/code&gt; verá que nenhuma fórmula está instalada:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;phantomjs&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;stable&lt;/span&gt; &lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;://&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;phantomjs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
+&lt;span class="n"&gt;Not&lt;/span&gt; &lt;span class="n"&gt;installed&lt;/span&gt;
+&lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="o"&gt;://&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;com&lt;/span&gt;&lt;span class="sr"&gt;/mxcl/homebrew/commits/master/Library/Formula/&lt;/span&gt;&lt;span class="n"&gt;phantomjs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;rb&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="brew macosx"></category></entry><entry><title>Vá direto pro código antes de pesquisar</title><link href="http://wevtimoteo.github.io/va-direto-pro-codigo-antes-de-pesquisar.html" rel="alternate"></link><updated>2013-03-12T14:13:00-04:00</updated><author><name>Weverton do Couto Timoteo</name></author><id>tag:wevtimoteo.github.io,2013-03-12:va-direto-pro-codigo-antes-de-pesquisar.html</id><summary type="html">&lt;p&gt;No começo desse mês recebi uma newsletter do &lt;a href="http://jstorimer.com"&gt;Jesse Storimer&lt;/a&gt; que achei muito interessante e resolvi fazer uma réplica.&lt;/p&gt;
+&lt;p&gt;Como o texto foi transmitido via newsletter não encontrei nenhum link direto pro artigo. Então irei tentar repassar a experiência nesse post, ao invés de copiar e colar o post dele em algum lugar.&lt;/p&gt;
+&lt;h2&gt;Batendo na parede&lt;/h2&gt;
+&lt;p&gt;Uma situação bem comum: estamos desenvolvendo e esbarramos em algum problema/bug que não conseguimos resolver. O que fazemos? Pesquisamos no Google.&lt;/p&gt;
+&lt;p&gt;Mas isso não é uma boa prática. Ok, muitas vezes você vai cair certinho naquele link no &lt;a href="http://www.stackoverflow.com"&gt;StackOverflow&lt;/a&gt; falando o que você precisa fazer e até muitas vezes o próprio mantenedor responde determinada questão. Mas, outras vezes, nem que um '42' apareça na sua frente você encontra a resposta.&lt;/p&gt;
+&lt;p&gt;Essa resposta que você tanto procura, sempre esteve em um único lugar: &lt;strong&gt;no código&lt;/strong&gt;.&lt;/p&gt;
+&lt;!-- more --&gt;
+
+&lt;h2&gt;Encontrando a solução&lt;/h2&gt;
+&lt;p&gt;Algumas vezes nem no código você precisa olhar, uma simples lida na documentação (ponto que o &lt;a href="http://twitter.com/darthmv"&gt;@darthmv&lt;/a&gt; sempre fala) resolva seu problema ou te dê uma luz.&lt;/p&gt;
+&lt;p&gt;Agora quando isso não resolve, vá direto ao código!&lt;/p&gt;
+&lt;h2&gt;Maneiras de buscar no código/Ou como chegar até ele&lt;/h2&gt;
+&lt;h3&gt;bundle open &lt;nomedagem&gt;&lt;/h3&gt;
+&lt;p&gt;Claro, se você está usando &lt;a href="http://www.gembundler.com"&gt;Bundler&lt;/a&gt; isso faz toda diferença. Esse comando irá abrir o código da Gem no seu &lt;code&gt;$EDITOR&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Combinando o &lt;code&gt;bundle open&lt;/code&gt; com um ack/grep ou até &lt;a href="https://github.com/ggreer/the_silver_searcher"&gt;The Silver Searcher&lt;/a&gt; são ótimos aliados para entender e encontrar o que está relacionado com o seu problema.&lt;/p&gt;
+&lt;h3&gt;qwandry&lt;/h3&gt;
+&lt;p&gt;qwandry é uma gem que permite você abrir o código fonte de qualquer coisa da standard lib do Ruby.&lt;/p&gt;
+&lt;p&gt;Para instalar: &lt;code&gt;gem install qwandry&lt;/code&gt; e para usar &lt;code&gt;qw nome_da_classe_na_standard_lib&lt;/code&gt;. Isso também abrirá o código fonte no seu $EDITOR.&lt;/p&gt;
+&lt;p&gt;Por exemplo, tenho dúvidas de como renderizar um arquivo ERB, qual método devo utilizar? Basta usar:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;qw erb&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;E então explorar o código fonte :)&lt;/p&gt;
+&lt;h3&gt;gem_readme&lt;/h3&gt;
+&lt;p&gt;Essa gem é bem útil quando você não quer ficar procurando a documentação no &lt;a href="http://www.github.com"&gt;GitHub&lt;/a&gt; ou no &lt;a href="http://www.rubygems.org"&gt;RubyGems&lt;/a&gt;. Ela abre o README da gem que você deseja com um simples comando.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gem install gem_readme&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Para usar:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gem readme activeadmin&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;ctags&lt;/h3&gt;
+&lt;p&gt;Você já deve ter ouvido falar de &lt;a href="http://ctags.sourceforge.net/ctags.html"&gt;Ctags&lt;/a&gt;, ou até usar. Se você ainda não usa de uma testada.&lt;/p&gt;
+&lt;p&gt;O Ctags é bem útil para navegar entre o código, principalmente código desconhecido.&lt;/p&gt;
+&lt;p&gt;Uma boa combinação é a &lt;a href="https://github.com/tpope/gem-ctags"&gt;gem-ctags do @tpope&lt;/a&gt; e &lt;a href="http://www.vim.org/scripts/script.php?script_id=1343"&gt;AutoTag&lt;/a&gt; (só não esqueça de colocar o ctags no seu gitignore global).&lt;/p&gt;
+&lt;p&gt;O Jesse aproveitou para dar &lt;a href="http://www.jstorimer.com/ri.html"&gt;umas dicas de usar o &lt;strong&gt;RI&lt;/strong&gt; ao invés do &lt;strong&gt;Rdoc&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;O que você ganha fazendo tudo isso?&lt;/h2&gt;
+&lt;h3&gt;Documentação não conta toda a história&lt;/h3&gt;
+&lt;p&gt;Nessa parte, o Jesse deu um exemplo bem bacana que eu vou simplesmente citar aqui:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ActiveRecord is a great example of this. When I'm trying to figure out what touch or reload or some other ActiveRecord::Base method does, I could look at the documentation. It would tell me how the method is intended to be used, what parameters it takes, and what it returns.&lt;/p&gt;
+&lt;p&gt;In most cases, this is all you need. But if you've got a weird bug, or you want to know how a given method interacts with the database, you've got to go to the code. Once you do, you'll see that the reload method is defined several times in different modules that call each other, tacking on different behaviours. This is something that the documentation didn't make clear.&lt;/p&gt;
+&lt;p&gt;If you want the whole story, go to the source.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Testes são as melhores documentações&lt;/h3&gt;
+&lt;p&gt;Como a comunidade Ruby ama testes, nada melhor do que olhar os testes para entender como usar determinado método ou até mesmo uma API.&lt;/p&gt;
+&lt;h3&gt;O melhor motivo: você aprende coisas novas&lt;/h3&gt;
+&lt;p&gt;Outras pessoas pensam de outra forma, têm outro estilo de código e approaches diferentes dos nossos. Lendo o código dessas pessoas irá inspirar você a ter uma nova ideia.&lt;/p&gt;
+&lt;h2&gt;E se tudo falhar?&lt;/h2&gt;
+&lt;p&gt;Aí sim você vai atrás de ajuda online. Mas pelo menos você já tentou de tudo e realmente aprendeu muito com isso!&lt;/p&gt;
+&lt;h2&gt;Créditos&lt;/h2&gt;
+&lt;p&gt;Eu apenas traduzi e expliquei de uma forma diferente, todos os créditos vão para o &lt;a href="http://jstorimer.com"&gt;Jesse Storimer&lt;/a&gt; pelo grande artigo.&lt;/p&gt;</summary><category term="development debugging"></category></entry><entry><title>O que é Teste de Regressão?</title><link href="http://wevtimoteo.github.io/o-que-e-teste-de-regressao.html" rel="alternate"></link><updated>2013-03-11T10:47:00-04:00</updated><author><name>Weverton do Couto Timoteo</name></author><id>tag:wevtimoteo.github.io,2013-03-11:o-que-e-teste-de-regressao.html</id><summary type="html">&lt;p&gt;Há um tempo já me pego lendo e ouvindo esse termo e nunca tinha entendido exatamente quais eram os momentos que eu deveria fazê-lo, então aproveitei para fazer um review completo sobre 'O que é Teste de Regressão?'.&lt;/p&gt;
+&lt;h3&gt;Qual o objetivo do teste de software?&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Identificar suas falhas para que a correção seja feita antes da entrega do produto ao usuário final.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Como um teste de regressão surge?&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Um componente novo ou modificado pode falhar quando usado com componentes inalterados, causando defeito
+nos componentes inalterados pela geração de efeitos colaterais ou pelas características de interação.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Quando isso ocorre, diz-se que o sisteme sobre testes regrediu, por isso esses testes são chamados de testes de regressão.&lt;/p&gt;
+&lt;p&gt;Em poucas palavras, você quebrou o teste de uma outra funcionalidade por conta dessa nova &lt;em&gt;feature&lt;/em&gt; ou &lt;em&gt;correção de bug&lt;/em&gt;.&lt;/p&gt;
+&lt;h3&gt;Quando um teste de regressão é utilizado?&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;durante o desenvolvimento iterativo&lt;/li&gt;
+&lt;li&gt;depois da depuração&lt;/li&gt;
+&lt;li&gt;no primeiro passo de uma integração&lt;/li&gt;
+&lt;li&gt;na manutenção de software&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;E dentro do escopo de Orientação a Objetos?&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;quando uma subclasse é desenvolvida&lt;/li&gt;
+&lt;li&gt;quando uma super-classe é alterada&lt;/li&gt;
+&lt;li&gt;quando uma classe servidora (classe que você estendeu, por exemplo)&lt;/li&gt;
+&lt;li&gt;quando uma correção de falha é realizada&lt;/li&gt;
+&lt;li&gt;quando uma classe é reusada em um novo contexto&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Isso é apenas um resumo, todas informações que citei podem ser consultadas com maiores detalhes nos links abaixo.&lt;/p&gt;
+&lt;h3&gt;Fontes:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.slideshare.net/csilvas/testes-de-regresso-automatizados"&gt;Slideshare @csilvas - Testes de regressão automatizados&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.testar.me/pages/testar_me_teste_funcional_regressao.html"&gt;Teste Funcional e Regressão&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.ic.unicamp.br/~ranido/mc626/Regressao.pdf"&gt;Testes de Regressão - R.Anido (Unicamp)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://practicingruby.com/articles/shared/afshdqdholth"&gt;Thoughts on regression testing - Praticing Ruby&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary><category term="development testing software regression"></category></entry><entry><title>Abrindo arquivos alterados no Git com seu $EDITOR</title><link href="http://wevtimoteo.github.io/abrindo-arquivos-alterados-no-git-com-seu-editor.html" rel="alternate"></link><updated>2013-03-08T15:13:00-04:00</updated><author><name>Weverton do Couto Timoteo</name></author><id>tag:wevtimoteo.github.io,2013-03-08:abrindo-arquivos-alterados-no-git-com-seu-editor.html</id><summary type="html">&lt;p&gt;Recomeçando o trabalho no início do dia:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git st&lt;/code&gt; (git status)&lt;/p&gt;
+&lt;p&gt;E obtenho:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# On branch master&lt;/span&gt;
+&lt;span class="c"&gt;# Changes not staged for commit:&lt;/span&gt;
+&lt;span class="c"&gt;#   (use &amp;quot;git add &amp;lt;file&amp;gt;...&amp;quot; to update what will be committed)&lt;/span&gt;
+&lt;span class="c"&gt;#   (use &amp;quot;git checkout -- &amp;lt;file&amp;gt;...&amp;quot; to discard changes in working directory)&lt;/span&gt;
+&lt;span class="c"&gt;#&lt;/span&gt;
+&lt;span class="c"&gt;# modified:   Gemfile&lt;/span&gt;
+&lt;span class="c"&gt;# modified:   Gemfile.lock&lt;/span&gt;
+&lt;span class="c"&gt;# modified:   app/api/company.rb&lt;/span&gt;
+&lt;span class="c"&gt;# modified:   app/helpers/authentication_helper.rb&lt;/span&gt;
+&lt;span class="c"&gt;# modified:   config/boot.rb&lt;/span&gt;
+&lt;span class="c"&gt;# modified:   config/initializers/app_config.rb&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Pensei: seria legal, automaticamente abrir esses arquivos no meu $EDITOR.&lt;/p&gt;
+&lt;p&gt;Um simples &lt;code&gt;git status --short&lt;/code&gt; resolveria isso, adicionado ao awk e o próprio $EDITOR:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$EDITOR $(git status --short | awk '$1 ~ /^M$/ {print $2}')&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Isso fará com que todos os arquivos modificados sejam abertos no seu $EDITOR favorito. Se for &lt;code&gt;vim&lt;/code&gt;, todos os arquivos serão abertos em buffers. Para abrir em uma abas:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;$EDITOR -p $(git status --short | awk '$1 ~ /^M$/ {print $2}')&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Depois disso pensei em usar em alias. Mas usar &lt;code&gt;gitedit&lt;/code&gt; seria muito chato, então fiz essa modificação no meu &lt;a href="https://github.com/wolcanus/dotfiles/commit/4321444655acae64b05ee02faad7f463df19aade"&gt;dotfiles&lt;/a&gt; para poder utilizar um simples:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;git edit&lt;/code&gt;&lt;/p&gt;</summary><category term="vim macos bash"></category></entry><entry><title>"Trocando de perfil no Google Chrome com atalhos de teclado"</title><link href="http://wevtimoteo.github.io/trocando-de-perfil-no-google-chrome-com-atalhos-de-teclado.html" rel="alternate"></link><updated>2013-03-05T13:22:00-04:00</updated><author><name>Weverton do Couto Timoteo</name></author><id>tag:wevtimoteo.github.io,2013-03-05:trocando-de-perfil-no-google-chrome-com-atalhos-de-teclado.html</id><summary type="html">&lt;p&gt;Todos os dias quando chego na &lt;a href="http://www.baby.com.br"&gt;Baby&lt;/a&gt;, abro o Google Chrome e uso os perfis para alternar entre minha Google Account e a do trabalho. No entanto, ficar clicando é um pouco chato e todos sabemos disso.&lt;/p&gt;
+&lt;p&gt;Saí em busca de um atalho para tal:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;⌘ + Shift + M&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Pronto, problema resolvido!&lt;/p&gt;
+&lt;p&gt;PS: Achei estranho o próprio Chrome não mostrar o atalho na Menu Bar.&lt;/p&gt;</summary><category term="macos chrome"></category></entry><entry><title>Salvando um arquivo como root sem fechar e abrir o Vim</title><link href="http://wevtimoteo.github.io/salvando-um-arquivo-como-root-sem-fechar-e-abrir-o-vim.html" rel="alternate"></link><updated>2013-03-01T11:29:00-04:00</updated><author><name>Weverton do Couto Timoteo</name></author><id>tag:wevtimoteo.github.io,2013-03-01:salvando-um-arquivo-como-root-sem-fechar-e-abrir-o-vim.html</id><summary type="html">&lt;p&gt;Seguindo a dica do &lt;a href="http://blog.lucascaton.com.br/"&gt;Lucas Catón&lt;/a&gt;: algumas vezes abrimos um arquivo que não temos permissão de escrita.&lt;/p&gt;
+&lt;p&gt;Mas já alteramos seu conteúdo =/&lt;/p&gt;
+&lt;p&gt;Ao invés de sair do Vim e abrir o arquivo como sudo/sudo -u, podemos executar:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;:w !sudo tee %&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Pronto! Nada de sair e entrar no vim por problemas de permissão de escrita!&lt;/p&gt;</summary></entry><entry><title>Tudo pronto para começar</title><link href="http://wevtimoteo.github.io/tudo-pronto-para-comecar.html" rel="alternate"></link><updated>2013-01-15T10:55:00-04:00</updated><author><name>Weverton do Couto Timoteo</name></author><id>tag:wevtimoteo.github.io,2013-01-15:tudo-pronto-para-comecar.html</id><summary type="html">&lt;p&gt;Olá! Finalmente coloquei uma utilidade nesse domínio, apesar que desde o início o objetivo já era colocar um blog aqui.&lt;/p&gt;
+&lt;p&gt;Meu objetivo com esse blog é escrever e documentar algumas experiências e criar um material de referência para a própria comunidade, já no embalo de retribuir com o que aprendi.&lt;/p&gt;
+&lt;p&gt;Muitos dos posts serão voltados a desenvolvimento de software mas espero escrever sobre o &lt;a href="http://manganomori.com.br"&gt;Mangá no Mori&lt;/a&gt; também.&lt;/p&gt;
+&lt;p&gt;Também sou co-fundador do blog &lt;a href="http://abstraindo.com"&gt;Abstraindo.com&lt;/a&gt; (apesar de não escrever nada nele há um bom tempo) mas continua valendo :)&lt;/p&gt;
+&lt;p&gt;Bom, para um post de introdução será só isso, agora eu rezo para não abandonar este blog também.&lt;/p&gt;</summary></entry></feed>
