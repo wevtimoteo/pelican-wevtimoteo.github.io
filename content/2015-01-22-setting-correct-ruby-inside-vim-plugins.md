@@ -9,11 +9,11 @@ Já tinha lido muitos artigos a respeito de [Cyclomatic Complexity](http://en.wi
 
 Antes tarde que nunca, encontrei o plugin [vim-flog](https://github.com/fousa/vim-flog) que é um fork do [vim-ruby-complexity](https://github.com/skammer/vim-ruby-complexity); que como o nome já diz, serve para avaliar a Complexidade Ciclomática dentro de scripts .rb.
 
-Acontece que esse plugin executa código ruby dentro do arquivo `.vim` (caso queira saber mais: [Scripting Vim with Ruby](http://mattmargolis.net/scripting_vim_with_ruby.pdf).
+Acontece que esse plugin executa código ruby dentro do arquivo `.vim` (caso queira saber mais: [Scripting Vim with Ruby](http://mattmargolis.net/scripting_vim_with_ruby.pdf)).
 
 Até então, isso não deveria ser um problema. Acontece que quando o script rodava:
 
-```
+```ruby
 ruby << EOF
 
 require 'rubygems'
@@ -22,9 +22,9 @@ require 'flog'
 class Flog
 ```
 
-Ocorria um erro na linha `require 'flog'`, apesar de eu já ter instalado a gem no meu ruby local usando `gem install flog`.
+Ocorria um erro na linha `require 'flog'` que não encontrava a `gem`, apesar de eu já ter instalado no meu `ruby` local usando `gem install flog`.
 
-Tentei entender o problema olhando o $GEM_PATH, $GEM_ROOT e $GEM_HOME dentro do código do plugin, no entanto, ambos estavam vazios.
+Tentei entender o problema olhando o `$GEM_PATH`, `$GEM_ROOT` e `$GEM_HOME` dentro do código do plugin, no entanto, ambos estavam vazios.
 
 Parti para outro caminho e olhei o path do ruby executado adicionando:
 
@@ -35,7 +35,7 @@ require 'rubygems'
 require 'flog'
 ```
 
-O `$:` serve para imprimir o path de onde o ruby é procurado (tente rodar isso dentro do irb).
+O `$:` serve para imprimir o path de onde o `ruby` é procurado (tente rodar isso dentro do `irb`).
 
 Nesse comando, percebi que o `ruby` que estava sendo executado era o que vem juntamente do OS X Yosemite (2.x) e não o meu `ruby` do `rbenv` (alternativa ao `rvm`).
 
