@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
         <meta charset="utf-8" />
-        <title>wevtimoteo - vim</title>
+        <title>wevtimoteo - ruby</title>
         <link rel="stylesheet" href="http://wevtimoteo.github.io/theme/css/main.css" />
 
         <!--[if IE]>
@@ -20,7 +20,7 @@
                     <li><a href="http://wevtimoteo.github.io/category/offtopic.html">Offtopic</a></li>
                     <li><a href="http://wevtimoteo.github.io/category/ruby.html">Ruby</a></li>
                     <li><a href="http://wevtimoteo.github.io/category/testing.html">Testing</a></li>
-                    <li class="active"><a href="http://wevtimoteo.github.io/category/vim.html">vim</a></li>
+                    <li><a href="http://wevtimoteo.github.io/category/vim.html">vim</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 
@@ -73,74 +73,10 @@ Achei um report do bug no <a href="https://github.com/dotphiles/dotzsh#mac-os-x"
 
 <span class="n">Unfortunately</span><span class="p">,</span> <span class="n">path_helper</span> <span class="n">always</span> <span class="n">reads</span> <span class="n">paths</span> <span class="n">from</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">paths</span> <span class="n">set</span> <span class="n">by</span> <span class="n">Apple</span> <span class="n">then</span> <span class="n">paths</span> <span class="n">from</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">paths</span><span class="p">.</span><span class="n">d</span> <span class="n">set</span> <span class="n">by</span> <span class="n">third</span> <span class="n">party</span> <span class="n">installers</span><span class="p">,</span> <span class="n">and</span> <span class="n">lastly</span> <span class="n">paths</span> <span class="n">from</span> <span class="n">the</span> <span class="n">PATH</span> <span class="n">environment</span> <span class="n">variable</span> <span class="n">set</span> <span class="n">by</span> <span class="n">the</span> <span class="n">parent</span> <span class="n">process</span><span class="p">,</span> <span class="n">which</span> <span class="n">ultimately</span> <span class="n">is</span> <span class="n">set</span> <span class="n">by</span> <span class="n">the</span> <span class="n">user</span> <span class="n">with</span> <span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="p">...</span> <span class="n">Thus</span><span class="p">,</span> <span class="n">it</span> <span class="n">reorders</span> <span class="n">path</span> <span class="n">priorities</span><span class="p">,</span> <span class="n">and</span> <span class="n">user</span> <span class="o">/</span><span class="n">bin</span> <span class="n">directories</span> <span class="n">meant</span> <span class="n">to</span> <span class="n">override</span> <span class="n">system</span> <span class="o">/</span><span class="n">bin</span> <span class="n">directories</span> <span class="n">end</span> <span class="n">up</span> <span class="n">at</span> <span class="n">the</span> <span class="n">tail</span> <span class="n">of</span> <span class="n">the</span> <span class="n">array</span><span class="p">.</span>
 </pre></div>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://wevtimoteo.github.io/abrindo-arquivos-alterados-no-git-com-seu-editor.html" rel="bookmark"
-                           title="Permalink to Abrindo arquivos alterados no Git com seu $EDITOR">Abrindo arquivos alterados no Git com seu $EDITOR</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-03-08T15:13:00">
-                Published: Fri 08 March 2013
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="http://wevtimoteo.github.io/author/weverton-do-couto-timoteo.html">Weverton do Couto Timoteo</a>
-        </address>
-<p>In <a href="http://wevtimoteo.github.io/category/vim.html">vim</a>. </p>
-<p>tags: <a href="http://wevtimoteo.github.io/tag/vim-macos-bash.html">vim macos bash</a> </p>
-</footer><!-- /.post-info -->                <p>Recomeçando o trabalho no início do dia:</p>
-<p><code>git st</code> (git status)</p>
-<p>E obtenho:</p>
-<div class="highlight"><pre><span class="c"># On branch master</span>
-<span class="c"># Changes not staged for commit:</span>
-<span class="c">#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</span>
-<span class="c">#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</span>
-<span class="c">#</span>
-<span class="c"># modified:   Gemfile</span>
-<span class="c"># modified:   Gemfile.lock</span>
-<span class="c"># modified:   app/api/company ...</span></pre></div>
-                <a class="readmore" href="http://wevtimoteo.github.io/abrindo-arquivos-alterados-no-git-com-seu-editor.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://wevtimoteo.github.io/salvando-um-arquivo-como-root-sem-fechar-e-abrir-o-vim.html" rel="bookmark"
-                           title="Permalink to Salvando um arquivo como root sem fechar e abrir o Vim">Salvando um arquivo como root sem fechar e abrir o Vim</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-03-01T11:29:00">
-                Published: Fri 01 March 2013
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="http://wevtimoteo.github.io/author/weverton-do-couto-timoteo.html">Weverton do Couto Timoteo</a>
-        </address>
-<p>In <a href="http://wevtimoteo.github.io/category/vim.html">vim</a>. </p>
-
-</footer><!-- /.post-info -->                <p>Seguindo a dica do <a href="http://blog.lucascaton.com.br/">Lucas Catón</a>: algumas vezes abrimos um arquivo que não temos permissão de escrita.</p>
-<p>Mas já alteramos seu conteúdo =/</p>
-<p>Ao invés de sair do Vim e abrir o arquivo como sudo/sudo -u, podemos executar:</p>
-<p><code>:w !sudo tee %</code></p>
-<p>Pronto! Nada de sair e entrar no vim por ...</p>
-                <a class="readmore" href="http://wevtimoteo.github.io/salvando-um-arquivo-como-root-sem-fechar-e-abrir-o-vim.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-                </ol><!-- /#posts-list -->
 <p class="paginator">
     Page 1 / 1
 </p>
-                </section><!-- /#content -->
+            </aside><!-- /#featured -->
         <section id="extras" class="body">
                 <div class="blogroll">
                         <h2>blogroll</h2>

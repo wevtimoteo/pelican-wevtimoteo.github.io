@@ -26,7 +26,66 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://wevtimoteo.github.io/o-que-significa-class-cluster-no-ios.html">O que significa 'Class Cluster' no iOS</a></h1>
+                    <h1 class="entry-title"><a href="http://wevtimoteo.github.io/configurando-ruby-correto-dentro-de-plugins-do-vim.html">Configurando ruby correto dentro de plugins do vim</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2014-10-06T23:10:00">
+                Published: Mon 06 October 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://wevtimoteo.github.io/author/weverton-do-couto-timoteo.html">Weverton do Couto Timoteo</a>
+        </address>
+<p>In <a href="http://wevtimoteo.github.io/category/vim.html">vim</a>. </p>
+<p>tags: <a href="http://wevtimoteo.github.io/tag/vim.html">vim</a> <a href="http://wevtimoteo.github.io/tag/ruby.html">ruby</a> <a href="http://wevtimoteo.github.io/tag/vim-plugins.html">vim plugins</a> </p>
+</footer><!-- /.post-info --><p>Primeiro post de 2015 e primeiro post na plataforma Pelican depois da migração do <a href="http://octopress.org/">Octopress</a> para o <a href="http://blog.getpelican.com/">Pelican</a>. Depois escrevo sobre como foi essa migração.</p>
+<p>Já tinha lido muitos artigos a respeito de <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity">Cyclomatic Complexity</a>, mas nunca tentei colocar algum script para avaliar meu código.</p>
+<p>Antes tarde que nunca, encontrei o plugin <a href="https://github.com/fousa/vim-flog">vim-flog</a> que é um fork do <a href="https://github.com/skammer/vim-ruby-complexity">vim-ruby-complexity</a>; que como o nome já diz, serve para avaliar a Complexidade Ciclomática dentro de scripts .rb.</p>
+<p>Acontece que esse plugin executa código ruby dentro do arquivo <code>.vim</code>. Até então, isso não deveria ser um problema. Acontece que quando o script rodava:</p>
+<div class="highlight"><pre><span class="n">ruby</span> <span class="o">&lt;&lt;</span> <span class="n">EOF</span>
+
+<span class="n">require</span> <span class="err">&#39;</span><span class="n">rubygems</span><span class="err">&#39;</span>
+<span class="n">require</span> <span class="err">&#39;</span><span class="n">flog</span><span class="err">&#39;</span>
+
+<span class="n">class</span> <span class="n">Flog</span>
+</pre></div>
+
+
+<p>Ocorria um erro na linha <code>require 'flog'</code>, apesar de eu já ter instalado a gem no meu ruby local usando <code>gem install flog</code>.</p>
+<p>Tentei entender o problema olhando o $GEM_PATH, $GEM_ROOT e $GEM_HOME dentro do código do plugin, no entanto, ambos estavam vazios.</p>
+<p>Parti para outro caminho e olhei o path do ruby executado adicionando:</p>
+<div class="highlight"><pre><span class="n">puts</span> <span class="err">$</span><span class="o">:</span>
+
+<span class="n">require</span> <span class="err">&#39;</span><span class="n">rubygems</span><span class="err">&#39;</span>
+<span class="n">require</span> <span class="err">&#39;</span><span class="n">flog</span><span class="err">&#39;</span>
+</pre></div>
+
+
+<p>O <code>$:</code> serve para imprimir o path de onde o ruby é procurado (tente rodar isso dentro do irb).</p>
+<p>Nesse comando, percebi que o <code>ruby</code> que estava sendo executado era o que vem juntamente do OS X Yosemite (2.x) e não o meu <code>ruby</code> do <code>rbenv</code> (alternativa ao <code>rvm</code>).</p>
+<p>Como eu sempre fiz upgrade nos releases do OS X e nunca um clean install.
+Achei um report do bug no <a href="https://github.com/dotphiles/dotzsh#mac-os-x">path_helper</a>, para resolver isso, basta:</p>
+<div class="highlight"><pre><span class="n">sudo</span> <span class="n">chmod</span> <span class="n">ugo</span><span class="o">-</span><span class="n">x</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">libexec</span><span class="o">/</span><span class="n">path_helper</span>
+</pre></div>
+
+
+<p>Segue trecho do link acima caso o link se torne obsoleto:</p>
+<div class="highlight"><pre><span class="n">path_helper</span> <span class="n">is</span> <span class="n">intended</span> <span class="n">to</span> <span class="n">make</span> <span class="n">it</span> <span class="n">easier</span> <span class="k">for</span> <span class="n">installers</span> <span class="n">to</span> <span class="n">add</span> <span class="n">new</span> <span class="n">paths</span> <span class="n">to</span> <span class="n">the</span> <span class="n">environment</span> <span class="n">without</span> <span class="n">having</span> <span class="n">to</span> <span class="n">edit</span> <span class="n">shell</span> <span class="n">configuration</span> <span class="n">files</span> <span class="n">by</span> <span class="n">adding</span> <span class="n">a</span> <span class="n">file</span> <span class="n">with</span> <span class="n">a</span> <span class="n">path</span> <span class="n">to</span> <span class="n">the</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">paths</span><span class="p">.</span><span class="n">d</span> <span class="n">directory</span><span class="p">.</span>
+
+<span class="n">Unfortunately</span><span class="p">,</span> <span class="n">path_helper</span> <span class="n">always</span> <span class="n">reads</span> <span class="n">paths</span> <span class="n">from</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">paths</span> <span class="n">set</span> <span class="n">by</span> <span class="n">Apple</span> <span class="n">then</span> <span class="n">paths</span> <span class="n">from</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">paths</span><span class="p">.</span><span class="n">d</span> <span class="n">set</span> <span class="n">by</span> <span class="n">third</span> <span class="n">party</span> <span class="n">installers</span><span class="p">,</span> <span class="n">and</span> <span class="n">lastly</span> <span class="n">paths</span> <span class="n">from</span> <span class="n">the</span> <span class="n">PATH</span> <span class="n">environment</span> <span class="n">variable</span> <span class="n">set</span> <span class="n">by</span> <span class="n">the</span> <span class="n">parent</span> <span class="n">process</span><span class="p">,</span> <span class="n">which</span> <span class="n">ultimately</span> <span class="n">is</span> <span class="n">set</span> <span class="n">by</span> <span class="n">the</span> <span class="n">user</span> <span class="n">with</span> <span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="p">...</span> <span class="n">Thus</span><span class="p">,</span> <span class="n">it</span> <span class="n">reorders</span> <span class="n">path</span> <span class="n">priorities</span><span class="p">,</span> <span class="n">and</span> <span class="n">user</span> <span class="o">/</span><span class="n">bin</span> <span class="n">directories</span> <span class="n">meant</span> <span class="n">to</span> <span class="n">override</span> <span class="n">system</span> <span class="o">/</span><span class="n">bin</span> <span class="n">directories</span> <span class="n">end</span> <span class="n">up</span> <span class="n">at</span> <span class="n">the</span> <span class="n">tail</span> <span class="n">of</span> <span class="n">the</span> <span class="n">array</span><span class="p">.</span>
+</pre></div>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="http://wevtimoteo.github.io/o-que-significa-class-cluster-no-ios.html" rel="bookmark"
+                           title="Permalink to O que significa 'Class Cluster' no iOS">O que significa 'Class Cluster' no iOS</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2014-10-06T23:10:00">
                 Published: Mon 06 October 2014
@@ -37,36 +96,14 @@
         </address>
 <p>In <a href="http://wevtimoteo.github.io/category/objective-c.html">Objective-c</a>. </p>
 <p>tags: <a href="http://wevtimoteo.github.io/tag/ios.html">ios</a> <a href="http://wevtimoteo.github.io/tag/foundation.html">foundation</a> <a href="http://wevtimoteo.github.io/tag/objective-c.html">objective-c</a> <a href="http://wevtimoteo.github.io/tag/class-cluster.html">class cluster</a> <a href="http://wevtimoteo.github.io/tag/design-pattern.html">design pattern</a> </p>
-</footer><!-- /.post-info --><p><code>Class Cluster</code> é um design pattern usado no framework Foundation.</p>
+</footer><!-- /.post-info -->                <p><code>Class Cluster</code> é um design pattern usado no framework Foundation.</p>
 <p>O objetivo desse pattern é agrupar subclasses privadas a partir de uma superclasse pública abstrata.</p>
 <h2>Sem Class Cluster</h2>
 <p>Imagine o seguinte cenário: você precisa armazenar diversas medidas, milímetros, centímetros, metros, quilômetros.</p>
-<p>O que todas essas medidas possuem em comum? Elas podem ser convertidas (ex.: metros =&gt; centímetros) e podem ser representadas por uma única classe.
-No entanto, o armazenamento de cada uma delas pode ser diferente.</p>
-<p>Para lidar com este cenário poderíamos implementar da seguinte maneira:</p>
-<ul>
-<li>Comprimento (superclasse)</li>
-<li>Milímetro</li>
-<li>Centímetro</li>
-<li>Metro</li>
-<li>Quilômetro</li>
-</ul>
-<p><code>Comprimento</code> é nossa superclasse que declara os métodos principais de operações que todas as outras subclasses terão em comum.</p>
-<p>Neste exemplo as subclasses são públicas, ou seja, você pode instanciá-las diretamente.</p>
-<p>O conceito é simples mas a interface começa a ficar complexa de acordo com a quantidade de subclasses.</p>
-<h2>Com Class Cluster</h2>
-<p>Com o mesmo cenário, vamos imaginar uma solução diferente: ao invés das subclasses públicas teremos apenas nossa superclasse pública. E como iremos instanciar uma subclasse irá depender do que nossa superclasse <code>Comprimento</code> suporta.</p>
-<p>Agora é responsabilidade da superclasse dizer qual objeto deve ser criado a partir do método de classe que for chamado.</p>
-<p>Exemplo:</p>
-<p><code>WWLength *aMeter = [WWLength lengthWithMeter:1];</code></p>
-<p>Cada objeto retornado pelo seu método de factory pode pertencer a um tipo de instância da subclasse. Mas não se esqueça, neste caso a subclasse está oculta, você não a conhece, então nossa instância <code>aMeter</code> é do tipo <code>WWLength</code>.</p>
-<p>Esse é o conceito do Class Cluster, que é utilizado intensamente no framework Foundation.</p>
-<p>Dê uma olhada na documentação para obter mais informações de classes do Foundation que seguem esta abordagem: <a href="https://developer.apple.com/library/ios/documentation/general/conceptual/DevPedia-CocoaCore/ClassCluster.html">Cocoa Core Class Cluters</a></p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+<p>O que todas essas medidas possuem em comum? Elas ...</p>
+                <a class="readmore" href="http://wevtimoteo.github.io/o-que-significa-class-cluster-no-ios.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
