@@ -14,7 +14,8 @@ Para anotar conteúdo eu pensei em todos, me preocupando em anotar dicas para in
 
 Foco em mostrar como sair do padrão Rails-way e ir para uma abordagem de acordo com a necessidade dentro do framework.
 
-Foi mencionado, algumas dicas:
+Algumas dicas:
+
 * Testar o suficiente para ganhar confiança no código que foi escrito
 * Buscar equilíbrio nas arquiteturas, tomar cuidado com over engineering
 * Sempre buscar gerar valor, sempre pensando em devolver o 'custo funcionário' para empresa, quando em dúvida sobre uma nova feature
