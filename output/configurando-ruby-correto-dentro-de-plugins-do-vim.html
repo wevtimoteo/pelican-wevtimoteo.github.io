@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="http://wevtimoteo.github.io/theme/css/main.css" />
 
         <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 </head>
 
@@ -19,6 +19,7 @@
                     <li><a href="http://wevtimoteo.github.io/category/objective-c.html">Objective-c</a></li>
                     <li><a href="http://wevtimoteo.github.io/category/offtopic.html">Offtopic</a></li>
                     <li><a href="http://wevtimoteo.github.io/category/ruby.html">Ruby</a></li>
+                    <li><a href="http://wevtimoteo.github.io/category/ruby-conferences.html">ruby, conferences</a></li>
                     <li><a href="http://wevtimoteo.github.io/category/testing.html">Testing</a></li>
                     <li class="active"><a href="http://wevtimoteo.github.io/category/vim.html">vim</a></li>
                 </ul></nav>
@@ -33,14 +34,14 @@
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2014-10-06T23:10:00">
+        <abbr class="published" title="2014-10-06T23:10:00-04:00">
                 Published: Mon 06 October 2014
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="http://wevtimoteo.github.io/author/weverton-do-couto-timoteo.html">Weverton do Couto Timoteo</a>
         </address>
-<p>In <a href="http://wevtimoteo.github.io/category/vim.html">vim</a>. </p>
+<p>In <a href="http://wevtimoteo.github.io/category/vim.html">vim</a>.</p>
 <p>tags: <a href="http://wevtimoteo.github.io/tag/vim.html">vim</a> <a href="http://wevtimoteo.github.io/tag/ruby.html">ruby</a> <a href="http://wevtimoteo.github.io/tag/vim-plugins.html">vim plugins</a> </p>
 </footer><!-- /.post-info -->      <p>Primeiro post de 2015 e primeiro post na plataforma Pelican depois da migração do <a href="http://octopress.org/">Octopress</a> para o <a href="http://blog.getpelican.com/">Pelican</a>. Depois escrevo sobre como foi essa migração.</p>
 <p>Já tinha lido muitos artigos a respeito de <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity">Cyclomatic Complexity</a>, mas nunca tentei colocar algum script para avaliar meu código.</p>
@@ -70,14 +71,14 @@
 <p>Nesse comando, percebi que o <code>ruby</code> que estava sendo executado era o que vem juntamente do OS X Yosemite (2.x) e não o meu <code>ruby</code> do <code>rbenv</code> (alternativa ao <code>rvm</code>).</p>
 <p>Como eu sempre fiz upgrade nos releases do <code>OS X</code> e nunca um clean install.
 Achei um report do bug no <a href="https://github.com/dotphiles/dotzsh#mac-os-x">path_helper</a>, para resolver isso, basta:</p>
-<div class="highlight"><pre><span class="n">sudo</span> <span class="n">chmod</span> <span class="n">ugo</span><span class="o">-</span><span class="n">x</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">libexec</span><span class="o">/</span><span class="n">path_helper</span>
+<div class="highlight"><pre>sudo chmod ugo-x /usr/libexec/path_helper
 </pre></div>
 
 
 <p>Segue trecho do link acima caso o link se torne obsoleto:</p>
-<div class="highlight"><pre><span class="n">path_helper</span> <span class="n">is</span> <span class="n">intended</span> <span class="n">to</span> <span class="n">make</span> <span class="n">it</span> <span class="n">easier</span> <span class="k">for</span> <span class="n">installers</span> <span class="n">to</span> <span class="n">add</span> <span class="n">new</span> <span class="n">paths</span> <span class="n">to</span> <span class="n">the</span> <span class="n">environment</span> <span class="n">without</span> <span class="n">having</span> <span class="n">to</span> <span class="n">edit</span> <span class="n">shell</span> <span class="n">configuration</span> <span class="n">files</span> <span class="n">by</span> <span class="n">adding</span> <span class="n">a</span> <span class="n">file</span> <span class="n">with</span> <span class="n">a</span> <span class="n">path</span> <span class="n">to</span> <span class="n">the</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">paths</span><span class="p">.</span><span class="n">d</span> <span class="n">directory</span><span class="p">.</span>
+<div class="highlight"><pre>path_helper is intended to make it easier for installers to add new paths to the environment without having to edit shell configuration files by adding a file with a path to the /etc/paths.d directory.
 
-<span class="n">Unfortunately</span><span class="p">,</span> <span class="n">path_helper</span> <span class="n">always</span> <span class="n">reads</span> <span class="n">paths</span> <span class="n">from</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">paths</span> <span class="n">set</span> <span class="n">by</span> <span class="n">Apple</span> <span class="n">then</span> <span class="n">paths</span> <span class="n">from</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">paths</span><span class="p">.</span><span class="n">d</span> <span class="n">set</span> <span class="n">by</span> <span class="n">third</span> <span class="n">party</span> <span class="n">installers</span><span class="p">,</span> <span class="n">and</span> <span class="n">lastly</span> <span class="n">paths</span> <span class="n">from</span> <span class="n">the</span> <span class="n">PATH</span> <span class="n">environment</span> <span class="n">variable</span> <span class="n">set</span> <span class="n">by</span> <span class="n">the</span> <span class="n">parent</span> <span class="n">process</span><span class="p">,</span> <span class="n">which</span> <span class="n">ultimately</span> <span class="n">is</span> <span class="n">set</span> <span class="n">by</span> <span class="n">the</span> <span class="n">user</span> <span class="n">with</span> <span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="p">...</span> <span class="n">Thus</span><span class="p">,</span> <span class="n">it</span> <span class="n">reorders</span> <span class="n">path</span> <span class="n">priorities</span><span class="p">,</span> <span class="n">and</span> <span class="n">user</span> <span class="o">/</span><span class="n">bin</span> <span class="n">directories</span> <span class="n">meant</span> <span class="n">to</span> <span class="n">override</span> <span class="n">system</span> <span class="o">/</span><span class="n">bin</span> <span class="n">directories</span> <span class="n">end</span> <span class="n">up</span> <span class="n">at</span> <span class="n">the</span> <span class="n">tail</span> <span class="n">of</span> <span class="n">the</span> <span class="n">array</span><span class="p">.</span>
+Unfortunately, path_helper always reads paths from /etc/paths set by Apple then paths from /etc/paths.d set by third party installers, and lastly paths from the PATH environment variable set by the parent process, which ultimately is set by the user with export PATH=... Thus, it reorders path priorities, and user /bin directories meant to override system /bin directories end up at the tail of the array.
 </pre></div>
     </div><!-- /.entry-content -->
 

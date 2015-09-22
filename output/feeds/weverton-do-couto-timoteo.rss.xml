@@ -1,5 +1,474 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>wevtimoteo</title><link>http://wevtimoteo.github.io/</link><description></description><atom:link href="http://wevtimoteo.github.io/feeds/weverton-do-couto-timoteo.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 06 Oct 2014 23:10:00 -0400</lastBuildDate><item><title>Configurando ruby correto dentro de plugins do vim</title><link>http://wevtimoteo.github.io/configurando-ruby-correto-dentro-de-plugins-do-vim.html</link><description>&lt;p&gt;Primeiro post de 2015 e primeiro post na plataforma Pelican depois da migração do &lt;a href="http://octopress.org/"&gt;Octopress&lt;/a&gt; para o &lt;a href="http://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;. Depois escrevo sobre como foi essa migração.&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>wevtimoteo</title><link>http://wevtimoteo.github.io/</link><description></description><atom:link href="http://wevtimoteo.github.io/feeds/weverton-do-couto-timoteo.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 22 Sep 2015 10:00:00 -0400</lastBuildDate><item><title>O que eu aprendi na RubyConf Brasil 2015</title><link>http://wevtimoteo.github.io/o-que-eu-aprendi-na-rubyconf-brasil-2015.html</link><description>&lt;p&gt;Segue minhas anotações da RubyConf que eu acredito que pode ajudar muitas pessoas de vários níveis de conhecimento.&lt;/p&gt;
+&lt;p&gt;Para anotar conteúdo eu pensei em todos, me preocupando em anotar dicas para iniciantes também :)&lt;/p&gt;
+&lt;h2&gt;Criando aplicativos Rails de fácil manutenção&lt;/h2&gt;
+&lt;h3&gt;Nando Vieira - &lt;a href="https://twitter.com/fnando"&gt;@fnando&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://speakerdeck.com/fnando/criando-aplicacoes-mais-faceis-de-manter-com-ruby-on-rails"&gt;Slides&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Foco em mostrar como sair do padrão Rails-way e ir para uma abordagem de acordo com a necessidade dentro do framework.&lt;/p&gt;
+&lt;p&gt;Foi mencionado, algumas dicas:
+&lt;em&gt; Testar o suficiente para ganhar confiança no código que foi escrito
+&lt;/em&gt; Buscar equilíbrio nas arquiteturas, tomar cuidado com over engineering
+&lt;em&gt; Sempre buscar gerar valor, sempre pensando em devolver o 'custo funcionário' para empresa, quando em dúvida sobre uma nova feature
+&lt;/em&gt; Independente da abordagem (monolítica ou microservices) prezar pela qualidade (escrever testes é essencial)
+&lt;em&gt; App do Shopify tem alguns exemplos de como manter qualidade em uma app monolítica (https://github.com/Shopify)
+&lt;/em&gt; Fugir do Rails-Way sempre que possível (experimentar bastante), ganhando experiência sobre outras abordagens
+&lt;em&gt; Adaptar estrutura do Rails para sua necessidade
+&lt;/em&gt; Ao criar uma pasta na estrutura do Rails, se preocupar se o pattern está corretamente implementado (presenters, seguir o pattern presenters mesmo)
+&lt;em&gt; Evitar uso de callbacks para lógica de negócios, usar apenas para normalização de objeto/params
+&lt;/em&gt; Extrair lógica das views (usar helpers, presenters, etc)
+&lt;em&gt; Controller não deve ter lógica de negócio, já a regra de negócio não deve ter conhecimento de coisas de controller
+&lt;/em&gt; Sempre tentar diminuir o número de dependências/gems, considerando até reimplementar como uma lib interna somente com as features utilizadas
+&lt;em&gt; Não modificar arquivos de config do Rails diretamente no config e sim fazer isso reabrindo o objeto de config dentro de um initializer, facilitando upgrades de versão e diff com o que é realmente necessário.
+&lt;/em&gt; Refatorar é melhor que reescrever
+&lt;em&gt; Não começar uma app com uma arquitetura complicada/complexa sem necessidade
+&lt;/em&gt; Sempre considerar sua experiência com patterns antes de decidir adotar algum que teoricamente resolveria seu problema
+&lt;em&gt; Não tenha medo de experimentar
+&lt;/em&gt; Ter um bom design de código é mais importante que ter uma arquitetura bem elaborada&lt;/p&gt;
+&lt;h4&gt;Links úteis:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Lib de log Scroll &lt;a href="https://github.com/asenchi/scrolls"&gt;https://github.com/asenchi/scrolls&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;O Diego Eis também fez algumas anotações dessa palestra: &lt;a href="http://diegoeis.com/rubyconf2015-nando/"&gt;http://diegoeis.com/rubyconf2015-nando/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Don't Fear the GIL: What Ruby has in the box for concurrent programming&lt;/h2&gt;
+&lt;h4&gt;Renan Ranelli - &lt;a href="https://twitter.com/renanranelli"&gt;@renanranelli&lt;/a&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://speakerdeck.com/rranelli/dont-fear-the-gil-what-ruby-has-in-the-box-for-concurrent-programming"&gt;Slides&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://milhouseonsoftware.com/"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Foco em mostrar como funciona o GIL (Global Interpreter Lock) funciona e alguns modelos de concorrência que podem funcionar para uma abordagem concorrente.&lt;/p&gt;
+&lt;p&gt;Concorrência e paralelismo são coisas distintas.&lt;/p&gt;
+&lt;p&gt;Concorrência: 2 tarefas começam ao mesmo tempo em cores do processador distintos, podendo terminar em tempos diferentes&lt;/p&gt;
+&lt;p&gt;Paralelismo: 2 tarefas começam ao mesmo tempo no mesmo core de um processador, disputando pelo processamento&lt;/p&gt;
+&lt;p&gt;Assíncronismo: Rodar de forma independente, isolada.&lt;/p&gt;
+&lt;h4&gt;Alguns modelos de concorrência:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Multiprocesses&lt;/li&gt;
+&lt;li&gt;Multithreading&lt;/li&gt;
+&lt;li&gt;Coroutines &lt;a href="http://blog.ontoillogical.com/blog/2014/07/21/delimited-continuations-in-ruby-part-2/"&gt;http://blog.ontoillogical.com/blog/2014/07/21/delimited-continuations-in-ruby-part-2/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Fibers &lt;a href="http://ruby-doc.org/core-2.2.0/Fiber.html"&gt;http://ruby-doc.org/core-2.2.0/Fiber.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Actors (Celluloid - https://celluloid.io/)&lt;/li&gt;
+&lt;li&gt;CSP e Process Calculus &lt;a href="https://en.wikipedia.org/wiki/Process_calculus"&gt;https://en.wikipedia.org/wiki/Process_calculus&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;GIL:&lt;/em&gt; Global Interpreter Lock previne execução de código Ruby paralela (espécie de semáforo).&lt;/p&gt;
+&lt;p&gt;Multithreading (https://github.com/ruby-concurrency/concurrent-ruby)&lt;/p&gt;
+&lt;h4&gt;Algumas abstrações:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Thread Pools&lt;/li&gt;
+&lt;li&gt;Ivars&lt;/li&gt;
+&lt;li&gt;Futures&lt;/li&gt;
+&lt;li&gt;Promises&lt;/li&gt;
+&lt;li&gt;Channels&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;OBS: Trap do &lt;code&gt;ruby&lt;/code&gt; só funciona pro main processes. Para matar sub processes utilizar &lt;code&gt;throw&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Ivar:&lt;/em&gt; "Safe to write", "Safe to read"
+&lt;em&gt;Futures:&lt;/em&gt;  Bom uso para chamadas de API
+&lt;em&gt;Promises:&lt;/em&gt; Igual Futures mas chainables (Monads)&lt;/p&gt;
+&lt;h4&gt;Lições aprendidas com programação concorrente:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Eliminar timeouts do código&lt;/li&gt;
+&lt;li&gt;Cuidado com o pool do ActiveRecord&lt;/li&gt;
+&lt;li&gt;Atualize suas dependências&lt;/li&gt;
+&lt;li&gt;Testes bem&lt;/li&gt;
+&lt;li&gt;Monitore: LEELA (Graph database em Haskell): https://github.com/locaweb/leela&lt;/li&gt;
+&lt;li&gt;Não faça concurrent programming desnecessariamente&lt;/li&gt;
+&lt;li&gt;Abordagem de variáveis imutáveis&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Ruby + Linux Pipes + Bancos de Grafos + Suor&lt;/h2&gt;
+&lt;h3&gt;Ronie Uliana - &lt;a href="https://twitter.com/ronie"&gt;@ronie&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Slides:&lt;/em&gt; &lt;a href="https://github.com/ruliana/palestra-rubyconf2015"&gt;https://github.com/ruliana/palestra-rubyconf2015&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A partir do Ruby 2.0 processos trabalham com estratégia Copy-on-write&lt;/li&gt;
+&lt;li&gt;Sort do linux + rápido que sort do Ruby&lt;/li&gt;
+&lt;li&gt;Livro - Flow based programming (http://www.jpaulmorrison.com/fbp/)&lt;/li&gt;
+&lt;li&gt;Hadoop FTW :P&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Como escrever aplicações ricas embarcadas em Ruby&lt;/h2&gt;
+&lt;h3&gt;Thiago Scalone - &lt;a href="https://twitter.com/scalone"&gt;@scalone&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Slides: Ainda não foi postado, mas existe uma palestra semelhante em &lt;a href="https://speakerdeck.com/scalone/mruby-change-the-embedded-development-way-1"&gt;https://speakerdeck.com/scalone/mruby-change-the-embedded-development-way-1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Palestra focada em apresentar &lt;code&gt;mruby&lt;/code&gt; (Ruby para dispositivos embarcados) e algumas soluções para IoT (Internet of Things/Internet das Coisas).&lt;/p&gt;
+&lt;p&gt;CEO da Cisco prevê um mercado de $ 19 trilhões para o mercado IoT.&lt;/p&gt;
+&lt;h4&gt;MRuby:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Static c/ Ruby Gems&lt;/li&gt;
+&lt;li&gt;Pequeno&lt;/li&gt;
+&lt;li&gt;Portátil&lt;/li&gt;
+&lt;li&gt;Economia de recursos (60 Kb)&lt;/li&gt;
+&lt;li&gt;ANSI C&lt;/li&gt;
+&lt;li&gt;Artoo&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Framework Ruby para Robótica&lt;/h4&gt;
+&lt;p&gt;&lt;a href="http://artoo.io/"&gt;http://artoo.io/&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API Ruby simples&lt;/li&gt;
+&lt;li&gt;15 plataformas&lt;/li&gt;
+&lt;li&gt;CLI (Command Line Interface)&lt;/li&gt;
+&lt;li&gt;Execução remota&lt;/li&gt;
+&lt;li&gt;Similares: GoBot (http://gobot.io/) e Cylon (http://cylonjs.com/).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Arduino Due:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;36g&lt;/li&gt;
+&lt;li&gt;500 Kb&lt;/li&gt;
+&lt;li&gt;3.3v&lt;/li&gt;
+&lt;li&gt;USB Serial&lt;/li&gt;
+&lt;li&gt;mruby-arduino (https://github.com/kyab/mruby-arduino)&lt;/li&gt;
+&lt;li&gt;Raspberry Pi:&lt;/li&gt;
+&lt;li&gt;$ 25&lt;/li&gt;
+&lt;li&gt;ARM II 700 Mhz&lt;/li&gt;
+&lt;li&gt;Ruby MRI&lt;/li&gt;
+&lt;li&gt;256 Mb (A/A+)&lt;/li&gt;
+&lt;li&gt;Serial/Ethernet/USB&lt;/li&gt;
+&lt;li&gt;Possível usar MRuby direto ao invés de Linux&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Pebble:&lt;/h4&gt;
+&lt;p&gt;&lt;a href="https://pebble.com/"&gt;https://pebble.com/&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Smartwatch&lt;/li&gt;
+&lt;li&gt;Somente bluetooth&lt;/li&gt;
+&lt;li&gt;FreeRTOS (Free firmware)&lt;/li&gt;
+&lt;li&gt;42g&lt;/li&gt;
+&lt;li&gt;$ 200&lt;/li&gt;
+&lt;li&gt;7 dias de bateria&lt;/li&gt;
+&lt;li&gt;Cortex M4 100 Mhz&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Desenvolvimento de software para embarcados:&lt;/h4&gt;
+&lt;p&gt;Além dos princípios SOLID;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Logging&lt;/li&gt;
+&lt;li&gt;Remote Logging&lt;/li&gt;
+&lt;li&gt;No file and memory saving&lt;/li&gt;
+&lt;li&gt;Avoid File Extraction&lt;/li&gt;
+&lt;li&gt;Testing&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/iij/mruby-mtest"&gt;https://github.com/iij/mruby-mtest&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/iij/mruby-mock"&gt;https://github.com/iij/mruby-mock&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Isolation/Runtime&lt;/li&gt;
+&lt;li&gt;mirb&lt;/li&gt;
+&lt;li&gt;Env/Deployment&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Fluxo de desenvolvimento&lt;/h4&gt;
+&lt;p&gt;Development.c -&amp;gt; Generate.o -&amp;gt; Sign -&amp;gt; Physically upload -&amp;gt; Test -&amp;gt; Massification -&amp;gt; Customer Feedback -&amp;gt; Repeat&lt;/p&gt;
+&lt;p&gt;Cloudwalk IO/Around the World - https://docs.cloudwalk.io/pt-BR/introduction
+Atualização de código
+I/O
+Tests
+Possível fazer espécie de continuous delivery para embarcados e quebra de paradigmas para desenvolvimento de embarcados.&lt;/p&gt;
+&lt;h4&gt;Da Funk&lt;/h4&gt;
+&lt;p&gt;Walk Framework API (https://github.com/cloudwalkio/da_funk)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API for dev&lt;/li&gt;
+&lt;li&gt;Notifications (Serf)&lt;/li&gt;
+&lt;li&gt;GPRS, WiFi, Ethernet&lt;/li&gt;
+&lt;li&gt;Device IoT&lt;/li&gt;
+&lt;li&gt;Go (CGo) + MRuby&lt;/li&gt;
+&lt;li&gt;MRuby, compilar código Go via CLI&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Ruby na Aviação: Construindo aviônicos em Ruby e lidando com suas restrições&lt;/h2&gt;
+&lt;h3&gt;Eduardo Mourão - &lt;a href="https://twitter.com/eduardordm"&gt;@eduardordm&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/eduardordm/enginevib"&gt;Fontes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://twitter.com/eduardordm/status/641296597985267712"&gt;Vídeo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Slides: Não encontrei&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Palestra mostrando como é trabalhar com Ruby no ramo da aviação.&lt;/p&gt;
+&lt;p&gt;No ramo comercial é utilizado waterfall (DO-178), dogfood. Já no ramo militar é utilizado Agile/Scrum (BASP), dogfood gourmet :P&lt;/p&gt;
+&lt;p&gt;Um monte de certificações.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Desenvolvimento utilizando ADA&lt;/li&gt;
+&lt;li&gt;Considerado estável&lt;/li&gt;
+&lt;li&gt;Bug que obriga ser rebootado a cada 248 dias por conta do i++ Loop of Death&lt;/li&gt;
+&lt;li&gt;http://www.engadget.com/2015/05/01/boeing-787-dreamliner-software-bug/&lt;/li&gt;
+&lt;li&gt;https://twitter.com/bengoldacre/status/594089242319552512&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Por que Ruby?&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Real time&lt;/li&gt;
+&lt;li&gt;Robustez&lt;/li&gt;
+&lt;li&gt;Rastreabilidade&lt;/li&gt;
+&lt;li&gt;DTrace (http://crypt.codemancers.com/posts/2013-04-16-profile-ruby-apps-dtrace-part1/)&lt;/li&gt;
+&lt;li&gt;PMAP&lt;/li&gt;
+&lt;li&gt;Conformidade&lt;/li&gt;
+&lt;li&gt;Estrutura&lt;/li&gt;
+&lt;li&gt;Soft ticker (RTOS)&lt;/li&gt;
+&lt;li&gt;Controller Sensor Scheduler Output&lt;/li&gt;
+&lt;li&gt;Uso de CPU não pode ultrapassar 0.2%, não tem cooler.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ticker -&amp;gt; não pode passar do deadline (30ms)&lt;/p&gt;
+&lt;p&gt;Caso precise desligar motor a jato, verificar vibrações :P&lt;/p&gt;
+&lt;p&gt;Medição de Memory Leak&lt;/p&gt;
+&lt;h4&gt;Rastreabilidade&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;DTrace&lt;/li&gt;
+&lt;li&gt;syscalls&lt;/li&gt;
+&lt;li&gt;object-create&lt;/li&gt;
+&lt;li&gt;array-create&lt;/li&gt;
+&lt;li&gt;hash-create&lt;/li&gt;
+&lt;li&gt;[c]method-entry&lt;/li&gt;
+&lt;li&gt;I/O é difícil&lt;/li&gt;
+&lt;li&gt;Simplicidade &amp;gt; Legibilidade&lt;/li&gt;
+&lt;li&gt;Profilling&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Introspecção altera o estado do programa, erros de alocação e perda de origem (qual .rb).&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Testes com Rubocop:&lt;/em&gt; https://github.com/bbatsov/rubocop
+Bikeshedding self-service&lt;/p&gt;
+&lt;h2&gt;fpm-cookery: package binaries without pain&lt;/h2&gt;
+&lt;h3&gt;Marcelo Correia - &lt;a href="https://twitter.com/salizzar"&gt;@salizzar&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://speakerdeck.com/salizzar/fpm-cookery-package-artefacts-without-pain"&gt;Slides&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Palestra com intuito de mostrar uma abstração para empacotamento cross platform.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Chef etc&lt;/li&gt;
+&lt;li&gt;Best way to deploy&lt;/li&gt;
+&lt;li&gt;Tarball&lt;/li&gt;
+&lt;li&gt;FTP/SSH&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Gerações&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;CFEngine (http://cfengine.com/)&lt;/li&gt;
+&lt;li&gt;Chef, Puppet&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ansible, SaltStack (http://saltstack.com/)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Fácil rollback&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Pode se tornar um pesadelo de é necessário compilar algo&lt;/li&gt;
+&lt;li&gt;Não deixar gcc instalado no servidor&lt;/li&gt;
+&lt;li&gt;Debian tem muita documentação mas uma alta curva de aprendizado&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;FPM-cookery&lt;/h4&gt;
+&lt;p&gt;https://github.com/bernd/fpm-cookery&lt;/p&gt;
+&lt;p&gt;Desenvolvido Bernd Ahlers (https://github.com/bernd) criador do Graylog (https://www.graylog.org/).&lt;/p&gt;
+&lt;p&gt;Uso bem simples, basicamente definir uma classe herdando de FPM::Cookery::Recipe e implementar #build e #create.&lt;/p&gt;
+&lt;h5&gt;Com fpm-cookery é possível&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;Baixar tarball&lt;/li&gt;
+&lt;li&gt;Baixar e compilar do source&lt;/li&gt;
+&lt;li&gt;Resolver build de dependência&lt;/li&gt;
+&lt;li&gt;Exportar para .rpm, .deb, .dmi, etc&lt;/li&gt;
+&lt;li&gt;Usar helpers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Gordon&lt;/h4&gt;
+&lt;p&gt;https://github.com/salizzar/gordon&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Agnostic packaging integra o fpm-cookery com foreman.&lt;/li&gt;
+&lt;li&gt;Em beta&lt;/li&gt;
+&lt;li&gt;Immutable infrastructure&lt;/li&gt;
+&lt;li&gt;ToDo:&lt;/li&gt;
+&lt;li&gt;inittab&lt;/li&gt;
+&lt;li&gt;upstart&lt;/li&gt;
+&lt;li&gt;supervisord&lt;/li&gt;
+&lt;li&gt;Supported languages:&lt;/li&gt;
+&lt;li&gt;Ruby&lt;/li&gt;
+&lt;li&gt;Java&lt;/li&gt;
+&lt;li&gt;Empacotamento de n projetos com uma única receita&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Evolução e futuro do uso de paradigmas no JavaScript&lt;/h2&gt;
+&lt;h3&gt;Jean Emer - &lt;a href="https://twitter.com/jcemer"&gt;@jcemer&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://jcemer.com/"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.slideshare.net/jeancarloemer/evoluo-e-futuro-do-uso-de-paradigmas-no-javascript"&gt;Slides&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Abordagem dos paradigmas trazidos pelo Backbone.js, Angular e React.&lt;/p&gt;
+&lt;h4&gt;Javascript&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Permite programar de forma funcional por conta da característica FCF (first-class functions), permitindo passar funções como parâmetro para outras funções.&lt;/li&gt;
+&lt;li&gt;Usar Underscore (http://underscorejs.org/) como uma lib funcional&lt;/li&gt;
+&lt;li&gt;EcmaScript 5.1&lt;/li&gt;
+&lt;li&gt;map&lt;/li&gt;
+&lt;li&gt;reduce&lt;/li&gt;
+&lt;li&gt;every&lt;/li&gt;
+&lt;li&gt;find&lt;/li&gt;
+&lt;li&gt;includes&lt;/li&gt;
+&lt;li&gt;Funcional:&lt;/li&gt;
+&lt;li&gt;Funções puras&lt;/li&gt;
+&lt;li&gt;Ausência de estado compartilhado&lt;/li&gt;
+&lt;li&gt;Não geram efeito colateral&lt;/li&gt;
+&lt;li&gt;Foco em compor funções&lt;/li&gt;
+&lt;li&gt;Trampolines (https://taylodl.wordpress.com/2013/06/07/functional-javascript-tail-call-optimization-and-trampolines/e http://raganwald.com/2013/03/28/trampolines-in-javascript.html)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;JS não é uma linguagem funcional, mas tem características de.
+"Programação funcional é sobre valores e suas funções"&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Promises resultado de uma operação assíncrona.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Backbone-slide http://georgeosddev.github.io/backbone-slide.js/&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;render só quando necessário&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Criar renders específicos&lt;/li&gt;
+&lt;li&gt;Um dos problemas dessas libs é que eles abusam muito de render e mudar o DOM com tamanha frequência é ruim para o navegador&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;React.JS&lt;/h4&gt;
+&lt;p&gt;https://facebook.github.io/react/&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Evita reescrever o DOM desnecessariamente&lt;/li&gt;
+&lt;li&gt;Componentes recebem propriedades de ancestrais&lt;/li&gt;
+&lt;li&gt;React marca como dirty e faz rerender somente quando necessário&lt;/li&gt;
+&lt;li&gt;VirtualDOM&lt;/li&gt;
+&lt;li&gt;Guarda as alterações e evita aplicar desnecessariamente&lt;/li&gt;
+&lt;li&gt;EventStream&lt;/li&gt;
+&lt;li&gt;Garante debounce dos requests&lt;/li&gt;
+&lt;li&gt;Transformar request em uma promise&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Event Stream&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Garante debounce dos requests&lt;/li&gt;
+&lt;li&gt;Transformar request em uma promise&lt;/li&gt;
+&lt;li&gt;Functional Reactive Programming (https://www.manning.com/books/functional-reactive-programming)&lt;/li&gt;
+&lt;li&gt;BaconJS (https://baconjs.github.io/)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Interfaces ricas com Rails e React.JS&lt;/h2&gt;
+&lt;h3&gt;Rodrigo Urubatan - &lt;a href="https://twitter.com/urubatan"&gt;@urubatan&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.slideshare.net/urubatan/interfaces-ricas-com-rails-e-reactjs-rubyconf-2015"&gt;Slides&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Palestra encheu bastante, com muitos interessados em React.JS.
+O blog mais feio do mundo, feito em Rails + React.JS em um SPA (single page app).&lt;/p&gt;
+&lt;p&gt;Usando a gem &lt;code&gt;backbone-on-rails&lt;/code&gt;  e &lt;code&gt;react-rails&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;A gem &lt;code&gt;react-rails&lt;/code&gt; (https://github.com/reactjs/react-rails) integra automaticamente com o asset pipeline do Rails.&lt;/p&gt;
+&lt;h4&gt;Componentes&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Extensão .js.jsx automaticamente compilado pelo asset pipeline.&lt;/li&gt;
+&lt;li&gt;View com apenas &amp;lt;%= react_component. … %&amp;gt;&lt;/li&gt;
+&lt;li&gt;Todos os controllers retornam collections em JSON&lt;/li&gt;
+&lt;li&gt;Roteamento integrado para navegação assíncrona, via Backbone.router&lt;/li&gt;
+&lt;li&gt;Verificar se é possível utilizar um JST para templates do React.JS, pois os templates são transformados em objetos pelo React&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;O código que foi gerado é ruim para rankeamento no SEO. Mesmo com plugins, o conteúdo não é apresentado de forma semântica.&lt;/p&gt;
+&lt;p&gt;React Router (https://github.com/rackt/react-router), suporta a sintaxa do ECMAScript 6 (com Gulp).&lt;/p&gt;
+&lt;p&gt;Flux (https://github.com/facebook/flux), arquitetura para construir interface de usuário.&lt;/p&gt;
+&lt;h2&gt;Como Trailblazer e Rails Engines podem salvar sua aplicação Rails monolítica&lt;/h2&gt;
+&lt;h3&gt;Celso Fernandes - &lt;a href="https://twitter.com/celsovjf"&gt;@celsovjf&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Slides: Não encontrei, mas achei uma de Trailblazer: https://speakerdeck.com/railspacific/trailblazer-a-new-architecture-for-rails&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Contract Pattern&lt;/li&gt;
+&lt;li&gt;Representer&lt;/li&gt;
+&lt;li&gt;Policy (que retorna boolean, ex.: current_user?)&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Fugir do CRUD&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;#setup!(params)&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;setup params&lt;/li&gt;
+&lt;li&gt;build model&lt;/li&gt;
+&lt;li&gt;Comment::Create&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Operations em app monolítica&lt;/h4&gt;
+&lt;p&gt;Micro Services&lt;/p&gt;
+&lt;p&gt;Component Based Rails Architectures
+Post de exemplo: http://teotti.com/component-based-rails-architecture-primer/
+mount API::Engine
+Dispatcher Rails -&amp;gt; Ember ou Rails views&lt;/p&gt;
+&lt;p&gt;Clean Architecture: https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html&lt;/p&gt;
+&lt;p&gt;TravisCI possui uma arquitetura de “componentes” (https://github.com/travis-ci/travis-listener).
+Exemplo de entrega de app Ember com Rails: RailsBlocks (https://github.com/railsblocks/railsblocks)&lt;/p&gt;
+&lt;h2&gt;Ruby, Javascript e Elixir juntando forças para WebRTC&lt;/h2&gt;
+&lt;h4&gt;Ben Langfeld - &lt;a href="https://twitter.com/benlangfeld"&gt;@benlangfeld&lt;/a&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://speakerdeck.com/benlangfeld/ruby-javascript-and-elixir-joining-forces-for-webrtc"&gt;Slides&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Palestra sobre WebRTC (tecnologia que permite utilizar câmera e microfone direto no navegador com uma conexão praticamente Peer2Peer).&lt;/p&gt;
+&lt;p&gt;WebRTC é utilizado pelo Google Hangouts e recentemente o Skype anunciou que também está indo para Web e extendendo essa solução para outras plataformas (como desktop e mobile).&lt;/p&gt;
+&lt;h4&gt;Padrões para Interoperabilidade&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Opius&lt;/li&gt;
+&lt;li&gt;SDP&lt;/li&gt;
+&lt;li&gt;ICE&lt;/li&gt;
+&lt;li&gt;DTLS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Fluxo de conexão&lt;/h4&gt;
+&lt;p&gt;Usuário A quer conectar com usuário B, para isso navegador manda para um intermediador HTTP informações sobre o suporte do navegador e esses dados são enviados para o navegador do usuário B que responde com as mesmas informações dele. Daí em diante ambos estabelecem uma conexão para trafegar essas informações.&lt;/p&gt;
+&lt;h4&gt;Suporte&lt;/h4&gt;
+&lt;h5&gt;Client-side&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;Chrome&lt;/li&gt;
+&lt;li&gt;Firefox&lt;/li&gt;
+&lt;li&gt;Opera&lt;/li&gt;
+&lt;li&gt;IE &amp;amp; Safari (através de plugins/addons)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5&gt;Server-side&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;FreeSwitch(1.4+) - https://freeswitch.org/&lt;/li&gt;
+&lt;li&gt;Asterisk (1++) - http://www.asterisk.org/&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Sites com WebRTC&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;https://talkingstick.io/&lt;/li&gt;
+&lt;li&gt;Modelo de comunicação em grupo&lt;/li&gt;
+&lt;li&gt;Rails engine: gem &lt;code&gt;talking-stick&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;mount no router&lt;/li&gt;
+&lt;li&gt;rake install&lt;/li&gt;
+&lt;li&gt;e pronto :P&lt;/li&gt;
+&lt;li&gt;https://cubeslam.com/&lt;/li&gt;
+&lt;li&gt;Arkanoid com WebRTC&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Por que adicionar Elixir na solução?&lt;/h4&gt;
+&lt;p&gt;Lidar com concorrência e escalabilidade. Uso de SIP (Session Initiation Protocol - disponível no Elixir através da VM do Erlang: https://www.erlang-solutions.com/resources/collaterals/sip).&lt;/p&gt;
+&lt;p&gt;WebRTC for JS - http://sipjs.com/
+MojoAuth to authenticate cross platform apps: https://github.com/mojolingo/mojo-auth&lt;/p&gt;
+&lt;h4&gt;Takeaways:&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Standards are not evil&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Qualé dessa Programação Funcional?&lt;/h2&gt;
+&lt;h3&gt;Andrew Rosa - &lt;a href="https://twitter.com/_andrewhr"&gt;@_andrewhr&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://speakerdeck.com/andrewhr/quale-dessa-programacao-funcional"&gt;Slides&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Lambda calculus&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Teoria das Categorias&lt;/li&gt;
+&lt;li&gt;Monads&lt;/li&gt;
+&lt;li&gt;Funções puras&lt;/li&gt;
+&lt;li&gt;Function as data&lt;/li&gt;
+&lt;li&gt;Conceito de closure do JS&lt;/li&gt;
+&lt;li&gt;Pipeline Operator Elixir similar ao Unix&lt;/li&gt;
+&lt;li&gt;Currying&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Outros slides de palestras que não assisti&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Arquiteturas Comuns de apps Rails -  https://speakerdeck.com/plataformatec/arquiteturas-comuns-de-apps-rails-at-rubyconf-br-2015&lt;/li&gt;
+&lt;li&gt;Qual é dessa Programação Funcional: https://speakerdeck.com/andrewhr/quale-dessa-programacao-funcional&lt;/li&gt;
+&lt;li&gt;Learn from my mystakes - https://speakerdeck.com/flaviafortes/learn-from-my-mistakes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Anotações pessoais&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Site da Sandi Metz: http://www.sandimetz.com/&lt;/li&gt;
+&lt;li&gt;Practical Object-Oriented Design in Ruby (http://www.amazon.com/gp/product/0321721330/ref=as_li_tl?ie=UTF8&amp;amp;camp=1789&amp;amp;creative=9325&amp;amp;creativeASIN=0321721330&amp;amp;linkCode=as2&amp;amp;tag=sandimetzcom-20&amp;amp;linkId=MEEIA2TTJVD6F5DO)
+*&lt;/li&gt;
+&lt;li&gt;The Cathedral &amp;amp; The Bazaar (http://www.amazon.com/The-Cathedral-Bazaar-Accidental-Revolutionary/dp/0596001088)&lt;/li&gt;
+&lt;li&gt;Conferir novos cursos do Coursera&lt;/li&gt;
+&lt;li&gt;Conferir EDX  (https://www.edx.org/)&lt;/li&gt;
+&lt;li&gt;Functional programming in Haskell (http://www.amazon.com/Haskell-Functional-Programming-International-Computer/dp/0201882957)&lt;/li&gt;
+&lt;li&gt;Nand2Tetris (http://www.nand2tetris.org/)&lt;/li&gt;
+&lt;li&gt;Hardware Software Interface (https://pt.coursera.org/course/hwswinterface)&lt;/li&gt;
+&lt;li&gt;Cloud Computing Coursera (https://pt.coursera.org/course/cloudcomputing)&lt;/li&gt;
+&lt;li&gt;Consistent Hashing (http://www.tom-e-white.com/2007/11/consistent-hashing.html)&lt;/li&gt;
+&lt;li&gt;RingPop (https://github.com/uber/ringpop-node)&lt;/li&gt;
+&lt;li&gt;Serf (http://www.slideshare.net/CotapEng/tech-talk-service-discovery-with-serf)&lt;/li&gt;
+&lt;li&gt;Big O (https://pt.khanacademy.org/computing/computer-science/algorithms/asymptotic-notation/a/big-o-notation)&lt;/li&gt;
+&lt;li&gt;Ordem de Grandeza&lt;/li&gt;
+&lt;li&gt;Sinais digitais - Eng. Eletrica&lt;/li&gt;
+&lt;li&gt;Sensor com filtro de ruído&lt;/li&gt;
+&lt;li&gt;Debian + Systemd&lt;/li&gt;
+&lt;li&gt;Currying in JS&lt;/li&gt;
+&lt;li&gt;Promise Pattern - https://www.promisejs.org/patterns/&lt;/li&gt;
+&lt;li&gt;Monad - https://en.wikipedia.org/wiki/Monad_(functional_programming)&lt;/li&gt;
+&lt;li&gt;Contract Pattern (http://hillside.net/plop/plop97/Proceedings/dechamplain.pdf)&lt;/li&gt;
+&lt;li&gt;Component Based Architecture (http://teotti.com/component-based-rails-architecture-primer/)&lt;/li&gt;
+&lt;li&gt;EmberJS - http://emberjs.com/&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Fotos da RubyConf&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.facebook.com/media/set/?set=a.963241117052195.1073741866.206944852681829&amp;amp;type=3"&gt;Facebook&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Weverton do Couto Timoteo</dc:creator><pubDate>Tue, 22 Sep 2015 10:00:00 -0400</pubDate><guid>tag:wevtimoteo.github.io,2015-09-22:o-que-eu-aprendi-na-rubyconf-brasil-2015.html</guid></item><item><title>Configurando ruby correto dentro de plugins do vim</title><link>http://wevtimoteo.github.io/configurando-ruby-correto-dentro-de-plugins-do-vim.html</link><description>&lt;p&gt;Primeiro post de 2015 e primeiro post na plataforma Pelican depois da migração do &lt;a href="http://octopress.org/"&gt;Octopress&lt;/a&gt; para o &lt;a href="http://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;. Depois escrevo sobre como foi essa migração.&lt;/p&gt;
 &lt;p&gt;Já tinha lido muitos artigos a respeito de &lt;a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"&gt;Cyclomatic Complexity&lt;/a&gt;, mas nunca tentei colocar algum script para avaliar meu código.&lt;/p&gt;
 &lt;p&gt;Antes tarde que nunca, encontrei o plugin &lt;a href="https://github.com/fousa/vim-flog"&gt;vim-flog&lt;/a&gt; que é um fork do &lt;a href="https://github.com/skammer/vim-ruby-complexity"&gt;vim-ruby-complexity&lt;/a&gt;; que como o nome já diz, serve para avaliar a Complexidade Ciclomática dentro de scripts .rb.&lt;/p&gt;
 &lt;p&gt;Acontece que esse plugin executa código ruby dentro do arquivo &lt;code&gt;.vim&lt;/code&gt; (caso queira saber mais: &lt;a href="http://mattmargolis.net/scripting_vim_with_ruby.pdf"&gt;Scripting Vim with Ruby&lt;/a&gt;).&lt;/p&gt;
@@ -27,14 +496,14 @@
 &lt;p&gt;Nesse comando, percebi que o &lt;code&gt;ruby&lt;/code&gt; que estava sendo executado era o que vem juntamente do OS X Yosemite (2.x) e não o meu &lt;code&gt;ruby&lt;/code&gt; do &lt;code&gt;rbenv&lt;/code&gt; (alternativa ao &lt;code&gt;rvm&lt;/code&gt;).&lt;/p&gt;
 &lt;p&gt;Como eu sempre fiz upgrade nos releases do &lt;code&gt;OS X&lt;/code&gt; e nunca um clean install.
 Achei um report do bug no &lt;a href="https://github.com/dotphiles/dotzsh#mac-os-x"&gt;path_helper&lt;/a&gt;, para resolver isso, basta:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;chmod&lt;/span&gt; &lt;span class="n"&gt;ugo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;libexec&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;path_helper&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;sudo chmod ugo-x /usr/libexec/path_helper
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Segue trecho do link acima caso o link se torne obsoleto:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;path_helper&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;intended&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;make&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="n"&gt;easier&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;installers&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;add&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;paths&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;environment&lt;/span&gt; &lt;span class="n"&gt;without&lt;/span&gt; &lt;span class="n"&gt;having&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;edit&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt; &lt;span class="n"&gt;configuration&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="n"&gt;adding&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;paths&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;directory&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;path_helper is intended to make it easier for installers to add new paths to the environment without having to edit shell configuration files by adding a file with a path to the /etc/paths.d directory.
 
-&lt;span class="n"&gt;Unfortunately&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;path_helper&lt;/span&gt; &lt;span class="n"&gt;always&lt;/span&gt; &lt;span class="n"&gt;reads&lt;/span&gt; &lt;span class="n"&gt;paths&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;paths&lt;/span&gt; &lt;span class="n"&gt;set&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="n"&gt;Apple&lt;/span&gt; &lt;span class="n"&gt;then&lt;/span&gt; &lt;span class="n"&gt;paths&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;etc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;paths&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="n"&gt;set&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="n"&gt;third&lt;/span&gt; &lt;span class="n"&gt;party&lt;/span&gt; &lt;span class="n"&gt;installers&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;lastly&lt;/span&gt; &lt;span class="n"&gt;paths&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;PATH&lt;/span&gt; &lt;span class="n"&gt;environment&lt;/span&gt; &lt;span class="n"&gt;variable&lt;/span&gt; &lt;span class="n"&gt;set&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;parent&lt;/span&gt; &lt;span class="n"&gt;process&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;which&lt;/span&gt; &lt;span class="n"&gt;ultimately&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;set&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="n"&gt;with&lt;/span&gt; &lt;span class="n"&gt;export&lt;/span&gt; &lt;span class="n"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt; &lt;span class="n"&gt;Thus&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="n"&gt;reorders&lt;/span&gt; &lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="n"&gt;priorities&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt; &lt;span class="n"&gt;directories&lt;/span&gt; &lt;span class="n"&gt;meant&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;override&lt;/span&gt; &lt;span class="n"&gt;system&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt; &lt;span class="n"&gt;directories&lt;/span&gt; &lt;span class="n"&gt;end&lt;/span&gt; &lt;span class="n"&gt;up&lt;/span&gt; &lt;span class="n"&gt;at&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;tail&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+Unfortunately, path_helper always reads paths from /etc/paths set by Apple then paths from /etc/paths.d set by third party installers, and lastly paths from the PATH environment variable set by the parent process, which ultimately is set by the user with export PATH=... Thus, it reorders path priorities, and user /bin directories meant to override system /bin directories end up at the tail of the array.
 &lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Weverton do Couto Timoteo</dc:creator><pubDate>Mon, 06 Oct 2014 23:10:00 -0400</pubDate><guid>tag:wevtimoteo.github.io,2014-10-06:configurando-ruby-correto-dentro-de-plugins-do-vim.html</guid><category>vim</category><category>ruby</category><category>vim plugins</category></item><item><title>O que significa 'Class Cluster' no iOS</title><link>http://wevtimoteo.github.io/o-que-significa-class-cluster-no-ios.html</link><description>&lt;p&gt;&lt;code&gt;Class Cluster&lt;/code&gt; é um design pattern usado no framework Foundation.&lt;/p&gt;
 &lt;p&gt;O objetivo desse pattern é agrupar subclasses privadas a partir de uma superclasse pública abstrata.&lt;/p&gt;
 &lt;h2&gt;Sem Class Cluster&lt;/h2&gt;
@@ -77,10 +546,10 @@ No entanto, o armazenamento de cada uma delas pode ser diferente.&lt;/p&gt;
 1.6.0    git checkout 9c7885b /usr/local/Library/Formula/phantomjs.rb
 1.5.0    git checkout dbcbe16 /usr/local/Library/Formula/phantomjs.rb
 1.4.1    git checkout cfbdf22 /usr/local/Library/Formula/phantomjs.rb
-1.3.0    git checkout 5848860 /usr/local/Library/Formula/phantomjs.rb
+1.3.0    git checkout &lt;span class="m"&gt;5848860&lt;/span&gt; /usr/local/Library/Formula/phantomjs.rb
 1.2.0    git checkout c50bbb8 /usr/local/Library/Formula/phantomjs.rb
 1.1.0    git checkout 4e7c332 /usr/local/Library/Formula/phantomjs.rb
-1.0.0    git checkout 0476235 /usr/local/Library/Formula/phantomjs.rb
+1.0.0    git checkout &lt;span class="m"&gt;0476235&lt;/span&gt; /usr/local/Library/Formula/phantomjs.rb
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -226,17 +695,17 @@ nos componentes inalterados pela geração de efeitos colaterais ou pelas caract
 &lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Weverton do Couto Timoteo</dc:creator><pubDate>Mon, 11 Mar 2013 10:47:00 -0400</pubDate><guid>tag:wevtimoteo.github.io,2013-03-11:o-que-e-teste-de-regressao.html</guid><category>development testing software regression</category></item><item><title>Abrindo arquivos alterados no Git com seu $EDITOR</title><link>http://wevtimoteo.github.io/abrindo-arquivos-alterados-no-git-com-seu-editor.html</link><description>&lt;p&gt;Recomeçando o trabalho no início do dia:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;git st&lt;/code&gt; (git status)&lt;/p&gt;
 &lt;p&gt;E obtenho:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# On branch master&lt;/span&gt;
-&lt;span class="c"&gt;# Changes not staged for commit:&lt;/span&gt;
-&lt;span class="c"&gt;#   (use &amp;quot;git add &amp;lt;file&amp;gt;...&amp;quot; to update what will be committed)&lt;/span&gt;
-&lt;span class="c"&gt;#   (use &amp;quot;git checkout -- &amp;lt;file&amp;gt;...&amp;quot; to discard changes in working directory)&lt;/span&gt;
-&lt;span class="c"&gt;#&lt;/span&gt;
-&lt;span class="c"&gt;# modified:   Gemfile&lt;/span&gt;
-&lt;span class="c"&gt;# modified:   Gemfile.lock&lt;/span&gt;
-&lt;span class="c"&gt;# modified:   app/api/company.rb&lt;/span&gt;
-&lt;span class="c"&gt;# modified:   app/helpers/authentication_helper.rb&lt;/span&gt;
-&lt;span class="c"&gt;# modified:   config/boot.rb&lt;/span&gt;
-&lt;span class="c"&gt;# modified:   config/initializers/app_config.rb&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;# On branch master
+# Changes not staged for commit:
+#   (use &amp;quot;git add &amp;lt;file&amp;gt;...&amp;quot; to update what will be committed)
+#   (use &amp;quot;git checkout -- &amp;lt;file&amp;gt;...&amp;quot; to discard changes in working directory)
+#
+# modified:   Gemfile
+# modified:   Gemfile.lock
+# modified:   app/api/company.rb
+# modified:   app/helpers/authentication_helper.rb
+# modified:   config/boot.rb
+# modified:   config/initializers/app_config.rb
 &lt;/pre&gt;&lt;/div&gt;
 
 
