@@ -271,12 +271,12 @@ Palestra com intuito de mostrar uma abstração para empacotamento cross platfor
 * Fácil rollback
 * Pode se tornar um pesadelo de é necessário compilar algo
 * Não deixar gcc instalado no servidor
-* Debian tem muita documentação mas uma alta curva de aprendizado
+* Tanto Debian quanto CentOS/RedHat possuem docs hard com alta curva de aprendizado
 
 #### FPM-cookery
 https://github.com/bernd/fpm-cookery
 
-Desenvolvido Bernd Ahlers (https://github.com/bernd) criador do Graylog (https://www.graylog.org/).
+Desenvolvido Bernd Ahlers (https://github.com/bernd) trabalha como desenvolvedor no Graylog (https://www.graylog.org/).
 
 Uso bem simples, basicamente definir uma classe herdando de FPM::Cookery::Recipe e implementar `#build` e `#install`.
 
