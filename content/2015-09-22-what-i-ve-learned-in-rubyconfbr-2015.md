@@ -1,6 +1,6 @@
 Title: O que eu aprendi na RubyConf Brasil 2015
 Date: 2015-09-22 10:00
-Category: ruby, conferences
+Category: Ruby
 
 Segue minhas anotações da RubyConf que eu acredito que pode ajudar muitas pessoas de vários níveis de conhecimento.
 
