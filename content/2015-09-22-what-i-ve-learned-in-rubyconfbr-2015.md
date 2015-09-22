@@ -278,7 +278,7 @@ https://github.com/bernd/fpm-cookery
 
 Desenvolvido Bernd Ahlers (https://github.com/bernd) criador do Graylog (https://www.graylog.org/).
 
-Uso bem simples, basicamente definir uma classe herdando de FPM::Cookery::Recipe e implementar #build e #create.
+Uso bem simples, basicamente definir uma classe herdando de FPM::Cookery::Recipe e implementar `#build` e `#install`.
 
 ##### Com fpm-cookery é possível
 
