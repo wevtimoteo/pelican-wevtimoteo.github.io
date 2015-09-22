@@ -7,25 +7,27 @@
 &lt;li&gt;&lt;a href="https://speakerdeck.com/fnando/criando-aplicacoes-mais-faceis-de-manter-com-ruby-on-rails"&gt;Slides&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Foco em mostrar como sair do padrão Rails-way e ir para uma abordagem de acordo com a necessidade dentro do framework.&lt;/p&gt;
-&lt;p&gt;Foi mencionado, algumas dicas:
-&lt;em&gt; Testar o suficiente para ganhar confiança no código que foi escrito
-&lt;/em&gt; Buscar equilíbrio nas arquiteturas, tomar cuidado com over engineering
-&lt;em&gt; Sempre buscar gerar valor, sempre pensando em devolver o 'custo funcionário' para empresa, quando em dúvida sobre uma nova feature
-&lt;/em&gt; Independente da abordagem (monolítica ou microservices) prezar pela qualidade (escrever testes é essencial)
-&lt;em&gt; App do Shopify tem alguns exemplos de como manter qualidade em uma app monolítica (https://github.com/Shopify)
-&lt;/em&gt; Fugir do Rails-Way sempre que possível (experimentar bastante), ganhando experiência sobre outras abordagens
-&lt;em&gt; Adaptar estrutura do Rails para sua necessidade
-&lt;/em&gt; Ao criar uma pasta na estrutura do Rails, se preocupar se o pattern está corretamente implementado (presenters, seguir o pattern presenters mesmo)
-&lt;em&gt; Evitar uso de callbacks para lógica de negócios, usar apenas para normalização de objeto/params
-&lt;/em&gt; Extrair lógica das views (usar helpers, presenters, etc)
-&lt;em&gt; Controller não deve ter lógica de negócio, já a regra de negócio não deve ter conhecimento de coisas de controller
-&lt;/em&gt; Sempre tentar diminuir o número de dependências/gems, considerando até reimplementar como uma lib interna somente com as features utilizadas
-&lt;em&gt; Não modificar arquivos de config do Rails diretamente no config e sim fazer isso reabrindo o objeto de config dentro de um initializer, facilitando upgrades de versão e diff com o que é realmente necessário.
-&lt;/em&gt; Refatorar é melhor que reescrever
-&lt;em&gt; Não começar uma app com uma arquitetura complicada/complexa sem necessidade
-&lt;/em&gt; Sempre considerar sua experiência com patterns antes de decidir adotar algum que teoricamente resolveria seu problema
-&lt;em&gt; Não tenha medo de experimentar
-&lt;/em&gt; Ter um bom design de código é mais importante que ter uma arquitetura bem elaborada&lt;/p&gt;
+&lt;p&gt;Algumas dicas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Testar o suficiente para ganhar confiança no código que foi escrito&lt;/li&gt;
+&lt;li&gt;Buscar equilíbrio nas arquiteturas, tomar cuidado com over engineering&lt;/li&gt;
+&lt;li&gt;Sempre buscar gerar valor, sempre pensando em devolver o 'custo funcionário' para empresa, quando em dúvida sobre uma nova feature&lt;/li&gt;
+&lt;li&gt;Independente da abordagem (monolítica ou microservices) prezar pela qualidade (escrever testes é essencial)&lt;/li&gt;
+&lt;li&gt;App do Shopify tem alguns exemplos de como manter qualidade em uma app monolítica (https://github.com/Shopify)&lt;/li&gt;
+&lt;li&gt;Fugir do Rails-Way sempre que possível (experimentar bastante), ganhando experiência sobre outras abordagens&lt;/li&gt;
+&lt;li&gt;Adaptar estrutura do Rails para sua necessidade&lt;/li&gt;
+&lt;li&gt;Ao criar uma pasta na estrutura do Rails, se preocupar se o pattern está corretamente implementado (presenters, seguir o pattern presenters mesmo)&lt;/li&gt;
+&lt;li&gt;Evitar uso de callbacks para lógica de negócios, usar apenas para normalização de objeto/params&lt;/li&gt;
+&lt;li&gt;Extrair lógica das views (usar helpers, presenters, etc)&lt;/li&gt;
+&lt;li&gt;Controller não deve ter lógica de negócio, já a regra de negócio não deve ter conhecimento de coisas de controller&lt;/li&gt;
+&lt;li&gt;Sempre tentar diminuir o número de dependências/gems, considerando até reimplementar como uma lib interna somente com as features utilizadas&lt;/li&gt;
+&lt;li&gt;Não modificar arquivos de config do Rails diretamente no config e sim fazer isso reabrindo o objeto de config dentro de um initializer, facilitando upgrades de versão e diff com o que é realmente necessário.&lt;/li&gt;
+&lt;li&gt;Refatorar é melhor que reescrever&lt;/li&gt;
+&lt;li&gt;Não começar uma app com uma arquitetura complicada/complexa sem necessidade&lt;/li&gt;
+&lt;li&gt;Sempre considerar sua experiência com patterns antes de decidir adotar algum que teoricamente resolveria seu problema&lt;/li&gt;
+&lt;li&gt;Não tenha medo de experimentar&lt;/li&gt;
+&lt;li&gt;Ter um bom design de código é mais importante que ter uma arquitetura bem elaborada&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h4&gt;Links úteis:&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;Lib de log Scroll &lt;a href="https://github.com/asenchi/scrolls"&gt;https://github.com/asenchi/scrolls&lt;/a&gt;&lt;/li&gt;

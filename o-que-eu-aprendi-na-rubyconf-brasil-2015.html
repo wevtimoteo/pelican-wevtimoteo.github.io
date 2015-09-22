@@ -50,25 +50,27 @@
 <li><a href="https://speakerdeck.com/fnando/criando-aplicacoes-mais-faceis-de-manter-com-ruby-on-rails">Slides</a></li>
 </ul>
 <p>Foco em mostrar como sair do padrão Rails-way e ir para uma abordagem de acordo com a necessidade dentro do framework.</p>
-<p>Foi mencionado, algumas dicas:
-<em> Testar o suficiente para ganhar confiança no código que foi escrito
-</em> Buscar equilíbrio nas arquiteturas, tomar cuidado com over engineering
-<em> Sempre buscar gerar valor, sempre pensando em devolver o 'custo funcionário' para empresa, quando em dúvida sobre uma nova feature
-</em> Independente da abordagem (monolítica ou microservices) prezar pela qualidade (escrever testes é essencial)
-<em> App do Shopify tem alguns exemplos de como manter qualidade em uma app monolítica (https://github.com/Shopify)
-</em> Fugir do Rails-Way sempre que possível (experimentar bastante), ganhando experiência sobre outras abordagens
-<em> Adaptar estrutura do Rails para sua necessidade
-</em> Ao criar uma pasta na estrutura do Rails, se preocupar se o pattern está corretamente implementado (presenters, seguir o pattern presenters mesmo)
-<em> Evitar uso de callbacks para lógica de negócios, usar apenas para normalização de objeto/params
-</em> Extrair lógica das views (usar helpers, presenters, etc)
-<em> Controller não deve ter lógica de negócio, já a regra de negócio não deve ter conhecimento de coisas de controller
-</em> Sempre tentar diminuir o número de dependências/gems, considerando até reimplementar como uma lib interna somente com as features utilizadas
-<em> Não modificar arquivos de config do Rails diretamente no config e sim fazer isso reabrindo o objeto de config dentro de um initializer, facilitando upgrades de versão e diff com o que é realmente necessário.
-</em> Refatorar é melhor que reescrever
-<em> Não começar uma app com uma arquitetura complicada/complexa sem necessidade
-</em> Sempre considerar sua experiência com patterns antes de decidir adotar algum que teoricamente resolveria seu problema
-<em> Não tenha medo de experimentar
-</em> Ter um bom design de código é mais importante que ter uma arquitetura bem elaborada</p>
+<p>Algumas dicas:</p>
+<ul>
+<li>Testar o suficiente para ganhar confiança no código que foi escrito</li>
+<li>Buscar equilíbrio nas arquiteturas, tomar cuidado com over engineering</li>
+<li>Sempre buscar gerar valor, sempre pensando em devolver o 'custo funcionário' para empresa, quando em dúvida sobre uma nova feature</li>
+<li>Independente da abordagem (monolítica ou microservices) prezar pela qualidade (escrever testes é essencial)</li>
+<li>App do Shopify tem alguns exemplos de como manter qualidade em uma app monolítica (https://github.com/Shopify)</li>
+<li>Fugir do Rails-Way sempre que possível (experimentar bastante), ganhando experiência sobre outras abordagens</li>
+<li>Adaptar estrutura do Rails para sua necessidade</li>
+<li>Ao criar uma pasta na estrutura do Rails, se preocupar se o pattern está corretamente implementado (presenters, seguir o pattern presenters mesmo)</li>
+<li>Evitar uso de callbacks para lógica de negócios, usar apenas para normalização de objeto/params</li>
+<li>Extrair lógica das views (usar helpers, presenters, etc)</li>
+<li>Controller não deve ter lógica de negócio, já a regra de negócio não deve ter conhecimento de coisas de controller</li>
+<li>Sempre tentar diminuir o número de dependências/gems, considerando até reimplementar como uma lib interna somente com as features utilizadas</li>
+<li>Não modificar arquivos de config do Rails diretamente no config e sim fazer isso reabrindo o objeto de config dentro de um initializer, facilitando upgrades de versão e diff com o que é realmente necessário.</li>
+<li>Refatorar é melhor que reescrever</li>
+<li>Não começar uma app com uma arquitetura complicada/complexa sem necessidade</li>
+<li>Sempre considerar sua experiência com patterns antes de decidir adotar algum que teoricamente resolveria seu problema</li>
+<li>Não tenha medo de experimentar</li>
+<li>Ter um bom design de código é mais importante que ter uma arquitetura bem elaborada</li>
+</ul>
 <h4>Links úteis:</h4>
 <ul>
 <li>Lib de log Scroll <a href="https://github.com/asenchi/scrolls">https://github.com/asenchi/scrolls</a></li>
