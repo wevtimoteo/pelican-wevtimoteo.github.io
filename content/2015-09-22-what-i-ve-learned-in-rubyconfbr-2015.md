@@ -388,7 +388,7 @@ Flux (https://github.com/facebook/flux), arquitetura para construir interface de
 ## Como Trailblazer e Rails Engines podem salvar sua aplicação Rails monolítica
 
 ### Celso Fernandes - [@celsovjf](https://twitter.com/celsovjf)
-Slides: Não encontrei, mas achei uma de Trailblazer: https://speakerdeck.com/railspacific/trailblazer-a-new-architecture-for-rails
+* [Slides](https://speakerdeck.com/fernandes/how-trailblazer-and-rails-engines-can-save-your-rails-monolith-application)
 
 * Contract Pattern
 * Representer
