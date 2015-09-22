@@ -390,6 +390,8 @@ Flux (https://github.com/facebook/flux), arquitetura para construir interface de
 ### Celso Fernandes - [@celsovjf](https://twitter.com/celsovjf)
 * [Slides](https://speakerdeck.com/fernandes/how-trailblazer-and-rails-engines-can-save-your-rails-monolith-application)
 
+Tópicos:
+
 * Contract Pattern
 * Representer
 * Policy (que retorna boolean, ex.: current_user?)
