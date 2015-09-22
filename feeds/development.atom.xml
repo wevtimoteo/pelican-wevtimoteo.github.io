@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>wevtimoteo</title><link href="http://wevtimoteo.github.io/" rel="alternate"></link><link href="http://wevtimoteo.github.io/feeds/development.atom.xml" rel="self"></link><id>http://wevtimoteo.github.io/</id><updated>2013-03-12T14:13:00-04:00</updated><entry><title>Vá direto pro código antes de pesquisar</title><link href="http://wevtimoteo.github.io/va-direto-pro-codigo-antes-de-pesquisar.html" rel="alternate"></link><updated>2013-03-12T14:13:00-04:00</updated><author><name>Weverton do Couto Timoteo</name></author><id>tag:wevtimoteo.github.io,2013-03-12:va-direto-pro-codigo-antes-de-pesquisar.html</id><summary type="html">&lt;p&gt;No começo desse mês recebi uma newsletter do &lt;a href="http://jstorimer.com"&gt;Jesse Storimer&lt;/a&gt; que achei muito interessante e resolvi fazer uma réplica.&lt;/p&gt;
+&lt;p&gt;Como o texto foi transmitido via newsletter não encontrei nenhum link direto pro artigo. Então irei tentar repassar a experiência nesse post, ao invés de copiar e colar o post dele em algum lugar.&lt;/p&gt;
+&lt;h2&gt;Batendo na parede&lt;/h2&gt;
+&lt;p&gt;Uma situação bem comum: estamos desenvolvendo e esbarramos em algum problema/bug que não conseguimos resolver. O que fazemos? Pesquisamos no Google.&lt;/p&gt;
+&lt;p&gt;Mas isso não é uma boa prática. Ok, muitas vezes você vai cair certinho naquele link no &lt;a href="http://www.stackoverflow.com"&gt;StackOverflow&lt;/a&gt; falando o que você precisa fazer e até muitas vezes o próprio mantenedor responde determinada questão. Mas, outras vezes, nem que um '42' apareça na sua frente você encontra a resposta.&lt;/p&gt;
+&lt;p&gt;Essa resposta que você tanto procura, sempre esteve em um único lugar: &lt;strong&gt;no código&lt;/strong&gt;.&lt;/p&gt;
+&lt;!-- more --&gt;
+
+&lt;h2&gt;Encontrando a solução&lt;/h2&gt;
+&lt;p&gt;Algumas vezes nem no código você precisa olhar, uma simples lida na documentação (ponto que o &lt;a href="http://twitter.com/darthmv"&gt;@darthmv&lt;/a&gt; sempre fala) resolva seu problema ou te dê uma luz.&lt;/p&gt;
+&lt;p&gt;Agora quando isso não resolve, vá direto ao código!&lt;/p&gt;
+&lt;h2&gt;Maneiras de buscar no código/Ou como chegar até ele&lt;/h2&gt;
+&lt;h3&gt;bundle open &lt;nomedagem&gt;&lt;/h3&gt;
+&lt;p&gt;Claro, se você está usando &lt;a href="http://www.gembundler.com"&gt;Bundler&lt;/a&gt; isso faz toda diferença. Esse comando irá abrir o código da Gem no seu &lt;code&gt;$EDITOR&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Combinando o &lt;code&gt;bundle open&lt;/code&gt; com um ack/grep ou até &lt;a href="https://github.com/ggreer/the_silver_searcher"&gt;The Silver Searcher&lt;/a&gt; são ótimos aliados para entender e encontrar o que está relacionado com o seu problema.&lt;/p&gt;
+&lt;h3&gt;qwandry&lt;/h3&gt;
+&lt;p&gt;qwandry é uma gem que permite você abrir o código fonte de qualquer coisa da standard lib do Ruby.&lt;/p&gt;
+&lt;p&gt;Para instalar: &lt;code&gt;gem install qwandry&lt;/code&gt; e para usar &lt;code&gt;qw nome_da_classe_na_standard_lib&lt;/code&gt;. Isso também abrirá o código fonte no seu $EDITOR.&lt;/p&gt;
+&lt;p&gt;Por exemplo, tenho dúvidas de como renderizar um arquivo ERB, qual método devo utilizar? Basta usar:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;qw erb&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;E então explorar o código fonte :)&lt;/p&gt;
+&lt;h3&gt;gem_readme&lt;/h3&gt;
+&lt;p&gt;Essa gem é bem útil quando você não quer ficar procurando a documentação no &lt;a href="http://www.github.com"&gt;GitHub&lt;/a&gt; ou no &lt;a href="http://www.rubygems.org"&gt;RubyGems&lt;/a&gt;. Ela abre o README da gem que você deseja com um simples comando.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gem install gem_readme&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Para usar:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;gem readme activeadmin&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;ctags&lt;/h3&gt;
+&lt;p&gt;Você já deve ter ouvido falar de &lt;a href="http://ctags.sourceforge.net/ctags.html"&gt;Ctags&lt;/a&gt;, ou até usar. Se você ainda não usa de uma testada.&lt;/p&gt;
+&lt;p&gt;O Ctags é bem útil para navegar entre o código, principalmente código desconhecido.&lt;/p&gt;
+&lt;p&gt;Uma boa combinação é a &lt;a href="https://github.com/tpope/gem-ctags"&gt;gem-ctags do @tpope&lt;/a&gt; e &lt;a href="http://www.vim.org/scripts/script.php?script_id=1343"&gt;AutoTag&lt;/a&gt; (só não esqueça de colocar o ctags no seu gitignore global).&lt;/p&gt;
+&lt;p&gt;O Jesse aproveitou para dar &lt;a href="http://www.jstorimer.com/ri.html"&gt;umas dicas de usar o &lt;strong&gt;RI&lt;/strong&gt; ao invés do &lt;strong&gt;Rdoc&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;O que você ganha fazendo tudo isso?&lt;/h2&gt;
+&lt;h3&gt;Documentação não conta toda a história&lt;/h3&gt;
+&lt;p&gt;Nessa parte, o Jesse deu um exemplo bem bacana que eu vou simplesmente citar aqui:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ActiveRecord is a great example of this. When I'm trying to figure out what touch or reload or some other ActiveRecord::Base method does, I could look at the documentation. It would tell me how the method is intended to be used, what parameters it takes, and what it returns.&lt;/p&gt;
+&lt;p&gt;In most cases, this is all you need. But if you've got a weird bug, or you want to know how a given method interacts with the database, you've got to go to the code. Once you do, you'll see that the reload method is defined several times in different modules that call each other, tacking on different behaviours. This is something that the documentation didn't make clear.&lt;/p&gt;
+&lt;p&gt;If you want the whole story, go to the source.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Testes são as melhores documentações&lt;/h3&gt;
+&lt;p&gt;Como a comunidade Ruby ama testes, nada melhor do que olhar os testes para entender como usar determinado método ou até mesmo uma API.&lt;/p&gt;
+&lt;h3&gt;O melhor motivo: você aprende coisas novas&lt;/h3&gt;
+&lt;p&gt;Outras pessoas pensam de outra forma, têm outro estilo de código e approaches diferentes dos nossos. Lendo o código dessas pessoas irá inspirar você a ter uma nova ideia.&lt;/p&gt;
+&lt;h2&gt;E se tudo falhar?&lt;/h2&gt;
+&lt;p&gt;Aí sim você vai atrás de ajuda online. Mas pelo menos você já tentou de tudo e realmente aprendeu muito com isso!&lt;/p&gt;
+&lt;h2&gt;Créditos&lt;/h2&gt;
+&lt;p&gt;Eu apenas traduzi e expliquei de uma forma diferente, todos os créditos vão para o &lt;a href="http://jstorimer.com"&gt;Jesse Storimer&lt;/a&gt; pelo grande artigo.&lt;/p&gt;</summary><category term="development debugging"></category></entry></feed>
