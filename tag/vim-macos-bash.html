@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <title>wevtimoteo - vim macos bash</title>
         <link rel="stylesheet" href="http://wevtimoteo.github.io/theme/css/main.css" />
+        <link href="http://wevtimoteo.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="wevtimoteo Atom Feed" />
 
         <!--[if IE]>
             <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -40,7 +41,7 @@
 </footer><!-- /.post-info --><p>Recomeçando o trabalho no início do dia:</p>
 <p><code>git st</code> (git status)</p>
 <p>E obtenho:</p>
-<div class="highlight"><pre># On branch master
+<div class="highlight"><pre><span></span># On branch master
 # Changes not staged for commit:
 #   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
 #   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
@@ -60,7 +61,7 @@
 <p>Isso fará com que todos os arquivos modificados sejam abertos no seu $EDITOR favorito. Se for <code>vim</code>, todos os arquivos serão abertos em buffers. Para abrir em uma abas:</p>
 <p><code>$EDITOR -p $(git status --short | awk '$1 ~ /^M$/ {print $2}')</code></p>
 <p>Depois disso pensei em usar em alias. Mas usar <code>gitedit</code> seria muito chato, então fiz essa modificação no meu <a href="https://github.com/wolcanus/dotfiles/commit/4321444655acae64b05ee02faad7f463df19aade">dotfiles</a> para poder utilizar um simples:</p>
-<p><code>git edit</code></p>                </article>
+<p><code>git edit</code></p><p>There are <a href="http://wevtimoteo.github.io/abrindo-arquivos-alterados-no-git-com-seu-editor.html#disqus_thread">comments</a>.</p>                </article>
             </aside><!-- /#featured -->
         <section id="extras" class="body">
                 <div class="blogroll">
@@ -73,6 +74,7 @@
                 <div class="social">
                         <h2>social</h2>
                         <ul>
+                            <li><a href="http://wevtimoteo.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
 
                             <li><a href="http://www.twitter.com/wevtimoteo">Twitter</a></li>
                             <li><a href="http://www.github.com/wevtimoteo">Github</a></li>
@@ -88,5 +90,24 @@
                 <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
         </footer><!-- /#contentinfo -->
 
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-37654492-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+<script type="text/javascript">
+    var disqus_shortname = 'wevtimoteo';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
 </body>
 </html>

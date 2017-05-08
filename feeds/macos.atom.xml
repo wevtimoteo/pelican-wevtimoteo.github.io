@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>wevtimoteo</title><link href="http://wevtimoteo.github.io/" rel="alternate"></link><link href="http://wevtimoteo.github.io/feeds/macos.atom.xml" rel="self"></link><id>http://wevtimoteo.github.io/</id><updated>2013-03-18T17:51:00-04:00</updated><entry><title>Instalando uma versão específica de uma fórmula no Homebrew</title><link href="http://wevtimoteo.github.io/instalando-uma-versao-especifica-de-uma-formula-no-homebrew.html" rel="alternate"></link><updated>2013-03-18T17:51:00-04:00</updated><author><name>Weverton do Couto Timoteo</name></author><id>tag:wevtimoteo.github.io,2013-03-18:instalando-uma-versao-especifica-de-uma-formula-no-homebrew.html</id><summary type="html">&lt;p&gt;Fiquei brincando um pouco com os comandos do &lt;code&gt;brew&lt;/code&gt; e surgiu uma dúvida: como instalar versões específicas no &lt;a href="http://mxcl.github.com/homebrew/"&gt;Homebrew&lt;/a&gt;?&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>wevtimoteo</title><link href="http://wevtimoteo.github.io/" rel="alternate"></link><link href="http://wevtimoteo.github.io/feeds/macos.atom.xml" rel="self"></link><id>http://wevtimoteo.github.io/</id><updated>2013-03-18T17:51:00-04:00</updated><entry><title>Instalando uma versão específica de uma fórmula no Homebrew</title><link href="http://wevtimoteo.github.io/instalando-uma-versao-especifica-de-uma-formula-no-homebrew.html" rel="alternate"></link><published>2013-03-18T17:51:00-04:00</published><updated>2013-03-18T17:51:00-04:00</updated><author><name>Weverton do Couto Timoteo</name></author><id>tag:wevtimoteo.github.io,2013-03-18:instalando-uma-versao-especifica-de-uma-formula-no-homebrew.html</id><summary type="html">&lt;p&gt;Fiquei brincando um pouco com os comandos do &lt;code&gt;brew&lt;/code&gt; e surgiu uma dúvida: como instalar versões específicas no &lt;a href="http://mxcl.github.com/homebrew/"&gt;Homebrew&lt;/a&gt;?&lt;/p&gt;
 &lt;h3&gt;Atualize&lt;/h3&gt;
 &lt;p&gt;Antes de mais nada, atualize suas fórmulas com o seguinte comando:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;brew update&lt;/code&gt;&lt;/p&gt;
@@ -7,17 +7,17 @@
 &lt;p&gt;Para listar as versões disponíveis para uma fórmula, utilize:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;brew versions phantomjs&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Você terá uma lista parecida com essa:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;1.8.1    git checkout 1a69283 /usr/local/Library/Formula/phantomjs.rb
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;1.8.1    git checkout 1a69283 /usr/local/Library/Formula/phantomjs.rb
 1.8.0    git checkout 7b4df06 /usr/local/Library/Formula/phantomjs.rb
 1.7.0    git checkout d37d922 /usr/local/Library/Formula/phantomjs.rb
 1.6.1    git checkout 6b8d25f /usr/local/Library/Formula/phantomjs.rb
 1.6.0    git checkout 9c7885b /usr/local/Library/Formula/phantomjs.rb
 1.5.0    git checkout dbcbe16 /usr/local/Library/Formula/phantomjs.rb
 1.4.1    git checkout cfbdf22 /usr/local/Library/Formula/phantomjs.rb
-1.3.0    git checkout 5848860 /usr/local/Library/Formula/phantomjs.rb
+1.3.0    git checkout &lt;span class="m"&gt;5848860&lt;/span&gt; /usr/local/Library/Formula/phantomjs.rb
 1.2.0    git checkout c50bbb8 /usr/local/Library/Formula/phantomjs.rb
 1.1.0    git checkout 4e7c332 /usr/local/Library/Formula/phantomjs.rb
-1.0.0    git checkout 0476235 /usr/local/Library/Formula/phantomjs.rb
+1.0.0    git checkout &lt;span class="m"&gt;0476235&lt;/span&gt; /usr/local/Library/Formula/phantomjs.rb
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -46,7 +46,7 @@
 &lt;p&gt;Primeiro vamos listar as versões que você possui na sua máquina:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;brew info phantomjs&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Eu tenho instalado:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;phantomjs&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;stable&lt;/span&gt; &lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;phantomjs&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;stable&lt;/span&gt; &lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
 &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;://&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;phantomjs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
 &lt;span class="sr"&gt;/usr/local/Cellar/phantomjs/&lt;/span&gt;&lt;span class="mf"&gt;1.7&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
 &lt;span class="sr"&gt;/usr/local/Cellar/phantomjs/&lt;/span&gt;&lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;96&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
@@ -59,7 +59,7 @@
 Agora vamos ir para 1.7.0:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;brew switch phantomjs 1.7.0&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Dê um &lt;code&gt;brew info phantomjs&lt;/code&gt; para confirmar se deu tudo certo:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;phantomjs&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;stable&lt;/span&gt; &lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;phantomjs&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;stable&lt;/span&gt; &lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
 &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;://&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;phantomjs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
 &lt;span class="sr"&gt;/usr/local/Cellar/phantomjs/&lt;/span&gt;&lt;span class="mf"&gt;1.7&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
 &lt;span class="sr"&gt;/usr/local/Cellar/phantomjs/&lt;/span&gt;&lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;96&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="n"&gt;M&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
@@ -72,7 +72,7 @@ Agora vamos ir para 1.7.0:&lt;/p&gt;
 Ou se preferir, você pode remover tudo de uma vez:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;brew uninstall -f phantomjs&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Se der &lt;code&gt;brew info phantomjs&lt;/code&gt; verá que nenhuma fórmula está instalada:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;phantomjs&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;stable&lt;/span&gt; &lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;phantomjs&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;stable&lt;/span&gt; &lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
 &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="o"&gt;://&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;phantomjs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;
 &lt;span class="n"&gt;Not&lt;/span&gt; &lt;span class="n"&gt;installed&lt;/span&gt;
 &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="o"&gt;://&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;com&lt;/span&gt;&lt;span class="sr"&gt;/mxcl/homebrew/commits/master/Library/Formula/&lt;/span&gt;&lt;span class="n"&gt;phantomjs&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;rb&lt;/span&gt;
