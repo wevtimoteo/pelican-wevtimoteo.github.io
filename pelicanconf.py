@@ -25,6 +25,9 @@ LINKS = (('Mangá no Mori', 'http://www.manganomori.com.br/'),
 SOCIAL = (('Twitter', 'http://www.twitter.com/wevtimoteo'),
           ('Github', 'http://www.github.com/wevtimoteo'),)
 
+# Static files
+STATIC_PATHS = ['extra/keybase.txt']
+
 DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
