@@ -26,7 +26,7 @@ SOCIAL = (('Twitter', 'http://www.twitter.com/wevtimoteo'),
           ('Github', 'http://www.github.com/wevtimoteo'),)
 
 # Static files
-STATIC_PATHS = ['extra/keybase.txt']
+STATIC_PATHS = ['keybase.txt']
 
 DEFAULT_PAGINATION = 10
 
